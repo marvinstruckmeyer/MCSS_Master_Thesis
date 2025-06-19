@@ -200,12 +200,6 @@ source("VIX_Prediction_time_series_cross_validation.R")
 source("UST_Prediction_time_series_cross_validation.R")
 ```
 
-## Key results
-
-- **4 sentiment analysis methods** compared: Dictionary-based, SentimentR, FinBERT, and Ollama
-- **Time-series cross-validation** on 3 financial indicators
-- **Statistical significance testing** using simple t-tests and more sophisticated Diebold-Mariano tests
-
 ## Methods
 
 ### Sentiment Analysis
