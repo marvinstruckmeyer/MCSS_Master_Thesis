@@ -1,0 +1,50 @@
+=== BLOOMBERG TV DATA COLLECTION SUMMARY FOR THESIS ===
+
+DATA SOURCES:
+• YouTube API v3 (video metadata and transcripts)
+• Bloomberg Television playlists
+• Direct transcript extraction using youtube-transcript-api
+
+PLAYLISTS ANALYZED:
+• Bloomberg Open Interest
+• The Asia Trade
+• Horizons Middle East, Africa
+• The Pulse With Francine Lacqua - Full Episodes
+• The Opening Trade
+• Bloomberg The Close (Full Shows)
+• Bloomberg Brief
+• Bloomberg Daybreak Europe
+• Bloomberg The China Show
+• Bloomberg Surveillance with Jon, Lisa and Annmarie (Full shows)
+• Bloomberg Surveillance with Tom, Jon and Lisa (Full Shows)
+• Bloomberg Surveillance Radio with Tom Keene and Paul Sweeney
+
+TEMPORAL COVERAGE:
+• Start date: 2022-08-09 18:44:41
+• End date: 2025-05-02 17:45:32
+• Years covered: 2.7
+
+VIDEO STATISTICS:
+• Total videos collected: 5,766
+• Full episodes (≥10 min): 2,216
+• Videos with transcripts: 2,179
+• Total video content: 4302 hours
+• Average video duration: 116.5 minutes
+
+TRANSCRIPT STATISTICS:
+• Total words in corpus: 40,236,988
+• Average words per video: 18,466
+
+DATA VOLUME:
+• Total data size: 0.86 GB
+
+PREPROCESSING FILTERS:
+• Minimum duration: 10 minutes (600 seconds)
+• Language: English transcripts only
+• Quality: Standard definition or higher
+• Duplicates: Removed based on video ID
+
+DATA QUALITY MEASURES:
+• Date correction using YouTube API
+• Transcript enhancement and cleaning
+• Metadata validation and enrichment

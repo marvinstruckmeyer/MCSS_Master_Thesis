@@ -1,0 +1,112 @@
+=== MARKET & MACRO DATA COLLECTION SUMMARY V2.0 ===
+Generated on: 2025-06-09 20:41:54 
+
+NEW FEATURES IN V2.0:
+✓ MOVE Index (^MOVE) - Bond Volatility Index
+✓ S&P 500 Sector ETFs - All 11 SPDR Sector Funds
+✓ Claims Data Fix - Saturday timestamps adjusted to Thursday releases
+✓ Enhanced error handling and reporting
+
+COLLECTION PARAMETERS:
+- Start Date: 2022-06-01 
+- End Date: 2025-06-09 
+- Business Days: 789 
+- FRED API Key Used: Yes
+
+DATASETS CREATED:
+1. Daily Variables Only: 30 variables
+2. Weekly Variables Only: 9 variables
+3. Combined Dataset: 39 variables
+
+NEW FEATURES STATUS:
+- MOVE Index Collection: ✓ SUCCESS 
+- Claims Data Fix: ✓ SUCCESS 
+- Sector ETFs Collected: 11 out of 11
+
+DAILY VARIABLES ( 30  total):
+- DGS2 (95.4% complete)
+- DGS5 (95.4% complete)
+- DGS10 (95.4% complete)
+- DGS30 (95.4% complete)
+- T5YIE (95.6% complete)
+- T10YIE (95.6% complete)
+- T5YIFR (95.6% complete)
+- BAMLH0A0HYM2 (98.7% complete)
+- BAMLC0A0CM (98.6% complete)
+- VIXCLS (98.7% complete)
+- DCOILWTICO (94.9% complete)
+- GSPC (95.9% complete)
+- VIX (95.9% complete)
+- DJI (95.9% complete)
+- IXIC (95.9% complete)
+- MOVE (95.3% complete)
+- COPPER (96.2% complete)
+- GOLD (96.1% complete)
+- USDOLLAR (96.3% complete)
+- XLF (95.9% complete)
+- XLK (95.9% complete)
+- XLV (95.9% complete)
+- XLY (95.9% complete)
+- XLP (95.9% complete)
+- XLRE (95.9% complete)
+- XLU (95.9% complete)
+- XLB (95.9% complete)
+- XLC (95.9% complete)
+- XLE (95.9% complete)
+- XLI (95.9% complete)
+
+WEEKLY VARIABLES ( 9  total):
+- ICSA (19.9% complete)
+- CCSA (19.8% complete)
+- WM2NS (19.4% complete)
+- WTREGEN (20% complete)
+- WRESBAL (20% complete)
+- NFCI (19.9% complete)
+- NFCICREDIT (19.9% complete)
+- NFCILEVERAGE (19.8% complete)
+- NFCIRISK (19.9% complete)
+
+COMBINED DATASET COMPLETENESS:
+# A tibble: 39 × 2
+   variable     completeness_pct
+   <chr>                   <dbl>
+ 1 WTREGEN                 100  
+ 2 WRESBAL                 100  
+ 3 ICSA                     99.9
+ 4 CCSA                     99.9
+ 5 NFCI                     99.7
+ 6 NFCICREDIT               99.7
+ 7 NFCILEVERAGE             99.7
+ 8 NFCIRISK                 99.7
+ 9 WM2NS                    99.6
+10 BAMLH0A0HYM2             98.7
+# ℹ 29 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+CLAIMS DATA DIAGNOSTIC:
+- ICSA (Initial Claims): 788 observations
+- CCSA (Continuing Claims): 788 observations
+- Date adjustment applied: Saturday timestamps -> Thursday releases
+SECTOR ETFs DIAGNOSTIC:
+- Successfully collected sectors:
+   XLF ( Financials ): 757 observations
+   XLK ( Technology ): 757 observations
+   XLV ( Health Care ): 757 observations
+   XLY ( Consumer Discretionary ): 757 observations
+   XLP ( Consumer Staples ): 757 observations
+   XLRE ( Real Estate ): 757 observations
+   XLU ( Utilities ): 757 observations
+   XLB ( Materials ): 757 observations
+   XLC ( Communication Services ): 757 observations
+   XLE ( Energy ): 757 observations
+   XLI ( Industrials ): 757 observations
+
+MOVE INDEX DIAGNOSTIC:
+- MOVE Index observations: 752 
+- Successfully added bond volatility data
+
+NOTES:
+- Weekly variables in the combined dataset are forward-filled to daily frequency
+- Business days only (Monday-Friday) are included
+- Claims data (ICSA/CCSA) timestamps adjusted from Saturday to Thursday
+- MOVE index provides bond market volatility complement to equity VIX

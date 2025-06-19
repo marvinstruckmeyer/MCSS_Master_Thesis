@@ -1,0 +1,389 @@
+Feature,Importance,Experiment,Model,Rank
+XLI_ret,6.170833986950415,all_sentiment,Random Forest,1
+SP500_momentum_5d,5.4088080789475725,all_sentiment,Random Forest,2
+GSPC_ret_1D_lagged,4.940918343989774,all_sentiment,Random Forest,3
+XLB_ret,4.855833142880807,all_sentiment,Random Forest,4
+USD_Risk_Signal,4.796590892204975,all_sentiment,Random Forest,5
+BAMLH0A0HYM2_bps,4.661619563860005,all_sentiment,Random Forest,6
+Yield_Curve_Slope,4.604819964211843,all_sentiment,Random Forest,7
+SP500_RSI_14w,4.595227690237061,all_sentiment,Random Forest,8
+VIX,4.51245037128121,all_sentiment,Random Forest,9
+XLK_ret,4.4750977818562845,all_sentiment,Random Forest,10
+XLE_ret,4.33884071879313,all_sentiment,Random Forest,11
+Defensive_vs_Offensive,4.236240308779739,all_sentiment,Random Forest,12
+XLC_ret,4.1125039812501125,all_sentiment,Random Forest,13
+IXIC_ret,4.0037935052534435,all_sentiment,Random Forest,14
+USDOLLAR_ret,3.9118149019173205,all_sentiment,Random Forest,15
+aggregate_sentiment_avg_momentum_3d,3.909304903280983,all_sentiment,Random Forest,16
+T10YIE_bps,3.7044078470373996,all_sentiment,Random Forest,17
+Bond_Equity_Divergence,3.4636501987384114,all_sentiment,Random Forest,18
+GSPC_ret,3.4473588426752975,all_sentiment,Random Forest,19
+NFCICREDIT,3.379448620372546,all_sentiment,Random Forest,20
+DJI_ret,3.267008326286085,all_sentiment,Random Forest,21
+ollama_score_avg,3.1246503393804876,all_sentiment,Random Forest,22
+SP500_distance_50d_MA,3.091079896926005,all_sentiment,Random Forest,23
+aggregate_sentiment_avg,3.0350422070111236,all_sentiment,Random Forest,24
+ollama_score_avg_momentum_5d,2.887950284820235,all_sentiment,Random Forest,25
+Credit_Risk_Spread,2.6673908023825774,all_sentiment,Random Forest,26
+DCOILWTICO_ret,2.6177817171361966,all_sentiment,Random Forest,27
+VIX_chg,2.5138376130032603,all_sentiment,Random Forest,28
+DGS5_bps,2.4376891956344298,all_sentiment,Random Forest,29
+Vol_Regime,2.2602452946262677,all_sentiment,Random Forest,30
+finbert_score_avg,2.226060491431578,all_sentiment,Random Forest,31
+NFCI,2.1718723914302944,all_sentiment,Random Forest,32
+XLY_ret,2.142633630805322,all_sentiment,Random Forest,33
+sentimentr_score_avg,2.1200122790896874,all_sentiment,Random Forest,34
+NFCIRISK,2.0414955761957962,all_sentiment,Random Forest,35
+VIXCLS_chg,2.005912206628638,all_sentiment,Random Forest,36
+DGS10_bps,1.9390304638944393,all_sentiment,Random Forest,37
+MOVE_chg,1.8644226934484711,all_sentiment,Random Forest,38
+T5YIFR_bps,1.7499000629453587,all_sentiment,Random Forest,39
+aggregate_sentiment_avg_momentum_5d,1.6743668845485493,all_sentiment,Random Forest,40
+sentimentr_score_avg_momentum_3d,1.4089771725857576,all_sentiment,Random Forest,41
+XLV_ret,1.3306003529780555,all_sentiment,Random Forest,42
+sentiment_cross_sectional_std,1.2882082483748907,all_sentiment,Random Forest,43
+sentimentr_score_avg_momentum_5d,1.2671283628661945,all_sentiment,Random Forest,44
+finbert_score_avg_momentum_3d,1.1142750325557909,all_sentiment,Random Forest,45
+SP500_momentum_20d,1.1087389482635455,all_sentiment,Random Forest,46
+dict_sentiment_avg,1.0943738476326268,all_sentiment,Random Forest,47
+COPPER_ret,1.074904779686932,all_sentiment,Random Forest,48
+GOLD_ret,1.0519991867251122,all_sentiment,Random Forest,49
+XLF_ret,1.007573817278996,all_sentiment,Random Forest,50
+DGS30_bps,0.9952403015700932,all_sentiment,Random Forest,51
+Flight_to_Quality,0.7807064534783398,all_sentiment,Random Forest,52
+dict_sentiment_avg_momentum_5d,0.7742779703464224,all_sentiment,Random Forest,53
+Tech_vs_Market,0.6855808288156059,all_sentiment,Random Forest,54
+finbert_score_avg_momentum_5d,0.6611796625399973,all_sentiment,Random Forest,55
+sentiment_cross_sectional_cv,0.6514177660785041,all_sentiment,Random Forest,56
+WRESBAL_chg,0.5611358386772141,all_sentiment,Random Forest,57
+CCSA_chg,0.38505450600958135,all_sentiment,Random Forest,58
+T5YIE_bps,0.3163235841725822,all_sentiment,Random Forest,59
+DGS2_bps,0.21023579483392704,all_sentiment,Random Forest,60
+ICSA_chg,0.2099380133331157,all_sentiment,Random Forest,61
+Commodity_Momentum,0.035301385745182816,all_sentiment,Random Forest,62
+WTREGEN_chg,-0.15151164723030233,all_sentiment,Random Forest,63
+ollama_score_avg_momentum_3d,-0.2526240166410412,all_sentiment,Random Forest,64
+XLP_ret,-0.3622201314398474,all_sentiment,Random Forest,65
+VIX_chg_1D_lagged,-0.38246456494054826,all_sentiment,Random Forest,66
+XLU_ret,-0.39814090087200976,all_sentiment,Random Forest,67
+dict_sentiment_avg_momentum_3d,-0.4141500955498574,all_sentiment,Random Forest,68
+Finance_vs_Market,-0.49041664523577005,all_sentiment,Random Forest,69
+NFCILEVERAGE,-0.5588032450710714,all_sentiment,Random Forest,70
+sentiment_cross_sectional_range,-0.6282062530092032,all_sentiment,Random Forest,71
+BAMLC0A0CM_bps,-1.4613649553633217,all_sentiment,Random Forest,72
+DGS10_bps_1D_lagged,-1.5821036089654401,all_sentiment,Random Forest,73
+XLRE_ret,-2.0825414448117687,all_sentiment,Random Forest,74
+WM2NS_chg,-2.640964613059952,all_sentiment,Random Forest,75
+Yield_Curve_Slope,0.042502243211907036,all_sentiment,XGBoost,1
+USDOLLAR_ret,0.03948352767813875,all_sentiment,XGBoost,2
+SP500_RSI_14w,0.035091237993662504,all_sentiment,XGBoost,3
+DCOILWTICO_ret,0.03329509982378571,all_sentiment,XGBoost,4
+T5YIFR_bps,0.03208419310697014,all_sentiment,XGBoost,5
+XLI_ret,0.03171524255785637,all_sentiment,XGBoost,6
+VIX_chg_1D_lagged,0.030520454323258644,all_sentiment,XGBoost,7
+finbert_score_avg_momentum_3d,0.026564457576820338,all_sentiment,XGBoost,8
+aggregate_sentiment_avg_momentum_3d,0.02325156498206159,all_sentiment,XGBoost,9
+GOLD_ret,0.02227086161481286,all_sentiment,XGBoost,10
+VIX,0.02135911281272153,all_sentiment,XGBoost,11
+XLY_ret,0.021080084960140327,all_sentiment,XGBoost,12
+finbert_score_avg,0.0206155666375919,all_sentiment,XGBoost,13
+SP500_momentum_5d,0.019636898581335473,all_sentiment,XGBoost,14
+XLC_ret,0.019606959337045007,all_sentiment,XGBoost,15
+SP500_distance_50d_MA,0.019519934621594955,all_sentiment,XGBoost,16
+sentimentr_score_avg_momentum_3d,0.018498457792154754,all_sentiment,XGBoost,17
+sentimentr_score_avg,0.017268268922771505,all_sentiment,XGBoost,18
+GSPC_ret_1D_lagged,0.016863517564914023,all_sentiment,XGBoost,19
+BAMLH0A0HYM2_bps,0.016265982402695466,all_sentiment,XGBoost,20
+XLV_ret,0.016114391915170525,all_sentiment,XGBoost,21
+sentiment_cross_sectional_cv,0.015804637590840113,all_sentiment,XGBoost,22
+XLE_ret,0.015311688876630486,all_sentiment,XGBoost,23
+aggregate_sentiment_avg_momentum_5d,0.015273595267913167,all_sentiment,XGBoost,24
+COPPER_ret,0.015231952575402665,all_sentiment,XGBoost,25
+VIX_chg,0.014882548228066702,all_sentiment,XGBoost,26
+finbert_score_avg_momentum_5d,0.014614840050319398,all_sentiment,XGBoost,27
+aggregate_sentiment_avg,0.014320863076308036,all_sentiment,XGBoost,28
+XLU_ret,0.01417163263110213,all_sentiment,XGBoost,29
+IXIC_ret,0.0133946973513498,all_sentiment,XGBoost,30
+sentimentr_score_avg_momentum_5d,0.012988966059311899,all_sentiment,XGBoost,31
+XLB_ret,0.012640765513964935,all_sentiment,XGBoost,32
+dict_sentiment_avg_momentum_5d,0.0125981961891332,all_sentiment,XGBoost,33
+ollama_score_avg_momentum_5d,0.012134998112635381,all_sentiment,XGBoost,34
+DJI_ret,0.012089044529759637,all_sentiment,XGBoost,35
+USD_Risk_Signal,0.012038921921466945,all_sentiment,XGBoost,36
+Tech_vs_Market,0.01143499299623188,all_sentiment,XGBoost,37
+Vol_Regime,0.01062363783590305,all_sentiment,XGBoost,38
+SP500_momentum_20d,0.010565982444864475,all_sentiment,XGBoost,39
+ollama_score_avg,0.010546906939504715,all_sentiment,XGBoost,40
+ollama_score_avg_momentum_3d,0.01052984460436498,all_sentiment,XGBoost,41
+sentiment_cross_sectional_std,0.010347867136932414,all_sentiment,XGBoost,42
+NFCI,0.010170323564155518,all_sentiment,XGBoost,43
+Bond_Equity_Divergence,0.0100258181237593,all_sentiment,XGBoost,44
+T10YIE_bps,0.009986747860975973,all_sentiment,XGBoost,45
+MOVE_chg,0.009824125528656743,all_sentiment,XGBoost,46
+GSPC_ret,0.009256608333474527,all_sentiment,XGBoost,47
+NFCILEVERAGE,0.009147793817989244,all_sentiment,XGBoost,48
+NFCICREDIT,0.008836465858769939,all_sentiment,XGBoost,49
+sentiment_cross_sectional_range,0.00854155569220852,all_sentiment,XGBoost,50
+XLF_ret,0.008371148008333724,all_sentiment,XGBoost,51
+XLRE_ret,0.008176728246909943,all_sentiment,XGBoost,52
+dict_sentiment_avg,0.007773977758843441,all_sentiment,XGBoost,53
+Finance_vs_Market,0.007709525970744351,all_sentiment,XGBoost,54
+Defensive_vs_Offensive,0.0076967802661700785,all_sentiment,XGBoost,55
+NFCIRISK,0.007675606307615597,all_sentiment,XGBoost,56
+XLP_ret,0.007601085388301974,all_sentiment,XGBoost,57
+Flight_to_Quality,0.007390242094020087,all_sentiment,XGBoost,58
+DGS30_bps,0.006777549933120543,all_sentiment,XGBoost,59
+DGS5_bps,0.006366606949297156,all_sentiment,XGBoost,60
+XLK_ret,0.006327376780936272,all_sentiment,XGBoost,61
+Commodity_Momentum,0.006228689208682025,all_sentiment,XGBoost,62
+DGS10_bps,0.005907511475899452,all_sentiment,XGBoost,63
+BAMLC0A0CM_bps,0.005615789170531657,all_sentiment,XGBoost,64
+dict_sentiment_avg_momentum_3d,0.004838124475337081,all_sentiment,XGBoost,65
+DGS10_bps_1D_lagged,0.004381382484029589,all_sentiment,XGBoost,66
+CCSA_chg,0.003707400975337891,all_sentiment,XGBoost,67
+Credit_Risk_Spread,0.003697126836972642,all_sentiment,XGBoost,68
+WRESBAL_chg,0.0029754299139519527,all_sentiment,XGBoost,69
+T5YIE_bps,0.0025655224212468284,all_sentiment,XGBoost,70
+VIXCLS_chg,0.0023790181909193165,all_sentiment,XGBoost,71
+WTREGEN_chg,0.002043844004935956,all_sentiment,XGBoost,72
+DGS2_bps,0.0014299643401158944,all_sentiment,XGBoost,73
+ICSA_chg,0.0014055950376067885,all_sentiment,XGBoost,74
+WM2NS_chg,1.3896630734572571e-5,all_sentiment,XGBoost,75
+XLI_ret,8.690398476986733,basic_sentiment,Random Forest,1
+SP500_momentum_5d,6.738048236294077,basic_sentiment,Random Forest,2
+XLB_ret,6.420622791850599,basic_sentiment,Random Forest,3
+SP500_RSI_14w,5.682280632898064,basic_sentiment,Random Forest,4
+USD_Risk_Signal,5.647864411963037,basic_sentiment,Random Forest,5
+XLC_ret,5.267326167638656,basic_sentiment,Random Forest,6
+SP500_distance_50d_MA,5.198263081721474,basic_sentiment,Random Forest,7
+USDOLLAR_ret,5.197620526000735,basic_sentiment,Random Forest,8
+XLK_ret,5.119152729386462,basic_sentiment,Random Forest,9
+BAMLH0A0HYM2_bps,5.007684029797986,basic_sentiment,Random Forest,10
+GSPC_ret,5.002734358967221,basic_sentiment,Random Forest,11
+IXIC_ret,4.702118005255629,basic_sentiment,Random Forest,12
+VIXCLS_chg,4.530995961384584,basic_sentiment,Random Forest,13
+Bond_Equity_Divergence,4.423470800875237,basic_sentiment,Random Forest,14
+Credit_Risk_Spread,4.3845657530763305,basic_sentiment,Random Forest,15
+T10YIE_bps,4.3401739750616,basic_sentiment,Random Forest,16
+VIX_chg,4.2895109314349344,basic_sentiment,Random Forest,17
+DJI_ret,3.933831433727464,basic_sentiment,Random Forest,18
+SP500_momentum_20d,3.73116955464088,basic_sentiment,Random Forest,19
+NFCICREDIT,3.653411516725667,basic_sentiment,Random Forest,20
+Defensive_vs_Offensive,3.4907918218021825,basic_sentiment,Random Forest,21
+XLY_ret,3.444803559460305,basic_sentiment,Random Forest,22
+DGS2_bps,3.4372088623742303,basic_sentiment,Random Forest,23
+Vol_Regime,3.3777804121217287,basic_sentiment,Random Forest,24
+DGS5_bps,3.295649137087824,basic_sentiment,Random Forest,25
+GOLD_ret,3.049922583504624,basic_sentiment,Random Forest,26
+DGS30_bps,3.003195752119827,basic_sentiment,Random Forest,27
+DGS10_bps,2.9930548119926095,basic_sentiment,Random Forest,28
+XLE_ret,2.833037630534928,basic_sentiment,Random Forest,29
+BAMLC0A0CM_bps,2.8241098572936303,basic_sentiment,Random Forest,30
+VIX,2.8048032353946812,basic_sentiment,Random Forest,31
+GSPC_ret_1D_lagged,2.597686828664322,basic_sentiment,Random Forest,32
+ollama_score_avg,2.4974893473738056,basic_sentiment,Random Forest,33
+XLF_ret,2.4501034009962224,basic_sentiment,Random Forest,34
+Tech_vs_Market,2.27091646205678,basic_sentiment,Random Forest,35
+sentimentr_score_avg,2.2394107277888478,basic_sentiment,Random Forest,36
+NFCILEVERAGE,2.1318679725111376,basic_sentiment,Random Forest,37
+Flight_to_Quality,2.0305640297780925,basic_sentiment,Random Forest,38
+Yield_Curve_Slope,1.9618447578458658,basic_sentiment,Random Forest,39
+NFCI,1.786943192250021,basic_sentiment,Random Forest,40
+NFCIRISK,1.6870424368704833,basic_sentiment,Random Forest,41
+dict_sentiment_avg,1.4309667244002964,basic_sentiment,Random Forest,42
+ICSA_chg,1.3182894438746768,basic_sentiment,Random Forest,43
+T5YIFR_bps,1.206137875971956,basic_sentiment,Random Forest,44
+aggregate_sentiment_avg,1.107483498057346,basic_sentiment,Random Forest,45
+T5YIE_bps,1.0929676299787447,basic_sentiment,Random Forest,46
+XLV_ret,0.8271560220660049,basic_sentiment,Random Forest,47
+MOVE_chg,0.5209264357739838,basic_sentiment,Random Forest,48
+Finance_vs_Market,0.28034767691896023,basic_sentiment,Random Forest,49
+WTREGEN_chg,0.12610199571165195,basic_sentiment,Random Forest,50
+DCOILWTICO_ret,-0.04686237289468653,basic_sentiment,Random Forest,51
+XLP_ret,-0.5330546136664328,basic_sentiment,Random Forest,52
+VIX_chg_1D_lagged,-0.5890577710062029,basic_sentiment,Random Forest,53
+COPPER_ret,-0.7432742472363201,basic_sentiment,Random Forest,54
+XLU_ret,-0.7546658571855319,basic_sentiment,Random Forest,55
+WRESBAL_chg,-0.892919500217653,basic_sentiment,Random Forest,56
+XLRE_ret,-1.0380046921704544,basic_sentiment,Random Forest,57
+DGS10_bps_1D_lagged,-1.4310320797438878,basic_sentiment,Random Forest,58
+Commodity_Momentum,-1.5018727499807634,basic_sentiment,Random Forest,59
+finbert_score_avg,-1.6676770033192339,basic_sentiment,Random Forest,60
+CCSA_chg,-1.7528585735586195,basic_sentiment,Random Forest,61
+WM2NS_chg,-3.881467636829437,basic_sentiment,Random Forest,62
+MOVE_chg,0.049654614116271666,basic_sentiment,XGBoost,1
+SP500_RSI_14w,0.039634538973065965,basic_sentiment,XGBoost,2
+Yield_Curve_Slope,0.039323576836177265,basic_sentiment,XGBoost,3
+USDOLLAR_ret,0.038998994555114484,basic_sentiment,XGBoost,4
+VIX,0.0323082937174653,basic_sentiment,XGBoost,5
+T5YIFR_bps,0.030524119289459938,basic_sentiment,XGBoost,6
+DCOILWTICO_ret,0.030222023460338126,basic_sentiment,XGBoost,7
+GOLD_ret,0.029305886668524996,basic_sentiment,XGBoost,8
+GSPC_ret,0.028343887441407294,basic_sentiment,XGBoost,9
+XLB_ret,0.02810290499937229,basic_sentiment,XGBoost,10
+XLI_ret,0.027326076563399273,basic_sentiment,XGBoost,11
+SP500_momentum_5d,0.027301482308739456,basic_sentiment,XGBoost,12
+SP500_distance_50d_MA,0.026488324893795732,basic_sentiment,XGBoost,13
+finbert_score_avg,0.025289492759812012,basic_sentiment,XGBoost,14
+GSPC_ret_1D_lagged,0.02512028357870569,basic_sentiment,XGBoost,15
+sentimentr_score_avg,0.025090400479609136,basic_sentiment,XGBoost,16
+Defensive_vs_Offensive,0.02365587797096709,basic_sentiment,XGBoost,17
+DJI_ret,0.021774119367546987,basic_sentiment,XGBoost,18
+XLE_ret,0.020023882497079024,basic_sentiment,XGBoost,19
+dict_sentiment_avg,0.01898674848267827,basic_sentiment,XGBoost,20
+Tech_vs_Market,0.018153692636563048,basic_sentiment,XGBoost,21
+XLU_ret,0.017405454900771816,basic_sentiment,XGBoost,22
+VIX_chg_1D_lagged,0.017169685564085033,basic_sentiment,XGBoost,23
+SP500_momentum_20d,0.016910066471863897,basic_sentiment,XGBoost,24
+ollama_score_avg,0.016858325394114103,basic_sentiment,XGBoost,25
+NFCIRISK,0.015132238012594636,basic_sentiment,XGBoost,26
+XLV_ret,0.015069943418020891,basic_sentiment,XGBoost,27
+COPPER_ret,0.014799239023886187,basic_sentiment,XGBoost,28
+VIX_chg,0.014630547124639766,basic_sentiment,XGBoost,29
+aggregate_sentiment_avg,0.014325610273963426,basic_sentiment,XGBoost,30
+Finance_vs_Market,0.014266959212988543,basic_sentiment,XGBoost,31
+NFCICREDIT,0.01396414950267067,basic_sentiment,XGBoost,32
+BAMLH0A0HYM2_bps,0.011958521231444027,basic_sentiment,XGBoost,33
+NFCI,0.011819375634070739,basic_sentiment,XGBoost,34
+DGS10_bps_1D_lagged,0.011498648794907683,basic_sentiment,XGBoost,35
+DGS5_bps,0.011205083282064326,basic_sentiment,XGBoost,36
+XLC_ret,0.010878576100124129,basic_sentiment,XGBoost,37
+XLP_ret,0.010711797015730364,basic_sentiment,XGBoost,38
+XLK_ret,0.01022975880977679,basic_sentiment,XGBoost,39
+Bond_Equity_Divergence,0.009891528989550468,basic_sentiment,XGBoost,40
+DGS30_bps,0.00960579844369414,basic_sentiment,XGBoost,41
+XLF_ret,0.009421154603229167,basic_sentiment,XGBoost,42
+Flight_to_Quality,0.009262965459502689,basic_sentiment,XGBoost,43
+XLRE_ret,0.00872666583676853,basic_sentiment,XGBoost,44
+XLY_ret,0.008692489781675791,basic_sentiment,XGBoost,45
+BAMLC0A0CM_bps,0.0082992959437626,basic_sentiment,XGBoost,46
+USD_Risk_Signal,0.008181183252418659,basic_sentiment,XGBoost,47
+T10YIE_bps,0.007806397235956069,basic_sentiment,XGBoost,48
+NFCILEVERAGE,0.007662718573561285,basic_sentiment,XGBoost,49
+Vol_Regime,0.007106025798375285,basic_sentiment,XGBoost,50
+IXIC_ret,0.006790333191393942,basic_sentiment,XGBoost,51
+Commodity_Momentum,0.006500221058693159,basic_sentiment,XGBoost,52
+WTREGEN_chg,0.006416213920630834,basic_sentiment,XGBoost,53
+DGS2_bps,0.00562371957935868,basic_sentiment,XGBoost,54
+DGS10_bps,0.005111580725862799,basic_sentiment,XGBoost,55
+ICSA_chg,0.004864461000452623,basic_sentiment,XGBoost,56
+Credit_Risk_Spread,0.00407320910252621,basic_sentiment,XGBoost,57
+T5YIE_bps,0.004019991918285235,basic_sentiment,XGBoost,58
+CCSA_chg,0.0026720069584236093,basic_sentiment,XGBoost,59
+WM2NS_chg,0.0024917640424427143,basic_sentiment,XGBoost,60
+WRESBAL_chg,0.0019778054364848626,basic_sentiment,XGBoost,61
+VIXCLS_chg,3.3926778314058746e-4,basic_sentiment,XGBoost,62
+USDOLLAR_ret,9.132297847885035,baseline,Random Forest,1
+SP500_momentum_5d,8.135833445721216,baseline,Random Forest,2
+XLI_ret,7.869059202687345,baseline,Random Forest,3
+XLB_ret,7.83860303063112,baseline,Random Forest,4
+SP500_RSI_14w,7.039376245596098,baseline,Random Forest,5
+USD_Risk_Signal,5.76030054229379,baseline,Random Forest,6
+DJI_ret,5.382197044230369,baseline,Random Forest,7
+Yield_Curve_Slope,5.1917977969525575,baseline,Random Forest,8
+SP500_distance_50d_MA,5.174089012078284,baseline,Random Forest,9
+IXIC_ret,4.955658250208674,baseline,Random Forest,10
+DGS30_bps,4.946115782454269,baseline,Random Forest,11
+XLC_ret,4.701013308660965,baseline,Random Forest,12
+XLE_ret,4.69776645355967,baseline,Random Forest,13
+GSPC_ret_1D_lagged,4.4032113596432625,baseline,Random Forest,14
+Defensive_vs_Offensive,4.299685758437871,baseline,Random Forest,15
+VIXCLS_chg,4.2820088683363835,baseline,Random Forest,16
+DGS10_bps,4.09649845729782,baseline,Random Forest,17
+XLK_ret,4.0736237271942555,baseline,Random Forest,18
+Bond_Equity_Divergence,3.7693412994712108,baseline,Random Forest,19
+GSPC_ret,3.7351540623622728,baseline,Random Forest,20
+XLY_ret,3.7230369261514795,baseline,Random Forest,21
+Credit_Risk_Spread,3.6746210757389806,baseline,Random Forest,22
+DGS5_bps,3.6623532151827374,baseline,Random Forest,23
+XLRE_ret,3.479701868282774,baseline,Random Forest,24
+NFCILEVERAGE,3.178125413081251,baseline,Random Forest,25
+NFCICREDIT,3.1331160753484935,baseline,Random Forest,26
+Vol_Regime,2.9944871248026663,baseline,Random Forest,27
+VIX,2.970023467730143,baseline,Random Forest,28
+GOLD_ret,2.721874284756641,baseline,Random Forest,29
+BAMLH0A0HYM2_bps,2.66763206819283,baseline,Random Forest,30
+VIX_chg,2.618220877747874,baseline,Random Forest,31
+WRESBAL_chg,2.480727137941482,baseline,Random Forest,32
+Flight_to_Quality,2.3212398687251556,baseline,Random Forest,33
+T10YIE_bps,2.3112466259374203,baseline,Random Forest,34
+T5YIFR_bps,2.3030533230533807,baseline,Random Forest,35
+DGS2_bps,2.22677393461799,baseline,Random Forest,36
+Tech_vs_Market,1.9729513882213432,baseline,Random Forest,37
+DCOILWTICO_ret,1.8842711741324938,baseline,Random Forest,38
+XLF_ret,1.8763855357669692,baseline,Random Forest,39
+SP500_momentum_20d,1.8580909494663853,baseline,Random Forest,40
+XLU_ret,1.8185057789951873,baseline,Random Forest,41
+T5YIE_bps,1.7691082060755587,baseline,Random Forest,42
+XLP_ret,1.5532393219866134,baseline,Random Forest,43
+ICSA_chg,0.60131880922115,baseline,Random Forest,44
+Finance_vs_Market,0.5905417107933211,baseline,Random Forest,45
+DGS10_bps_1D_lagged,0.523212885174663,baseline,Random Forest,46
+XLV_ret,0.49642292474090793,baseline,Random Forest,47
+NFCIRISK,0.4219515778042131,baseline,Random Forest,48
+Commodity_Momentum,0.36153813669639084,baseline,Random Forest,49
+COPPER_ret,0.12714134301903238,baseline,Random Forest,50
+MOVE_chg,0.11992056073123054,baseline,Random Forest,51
+CCSA_chg,9.825248200940188e-5,baseline,Random Forest,52
+BAMLC0A0CM_bps,-0.27861459046388043,baseline,Random Forest,53
+VIX_chg_1D_lagged,-0.41759903125644815,baseline,Random Forest,54
+NFCI,-0.9077326870266594,baseline,Random Forest,55
+WTREGEN_chg,-1.311909433481204,baseline,Random Forest,56
+WM2NS_chg,-2.178018170186214,baseline,Random Forest,57
+USDOLLAR_ret,0.04633941387275514,baseline,XGBoost,1
+SP500_RSI_14w,0.042754056435600936,baseline,XGBoost,2
+XLI_ret,0.041949801995758325,baseline,XGBoost,3
+MOVE_chg,0.038214091201928695,baseline,XGBoost,4
+DCOILWTICO_ret,0.03656968376212704,baseline,XGBoost,5
+SP500_distance_50d_MA,0.03545241021313585,baseline,XGBoost,6
+GOLD_ret,0.035360104223642615,baseline,XGBoost,7
+Yield_Curve_Slope,0.03471754443584722,baseline,XGBoost,8
+VIX,0.03084555481038961,baseline,XGBoost,9
+T5YIFR_bps,0.02852298807015828,baseline,XGBoost,10
+Defensive_vs_Offensive,0.028382863423598442,baseline,XGBoost,11
+XLB_ret,0.027493669852129556,baseline,XGBoost,12
+GSPC_ret,0.027287413909676247,baseline,XGBoost,13
+SP500_momentum_5d,0.02687990865842256,baseline,XGBoost,14
+DJI_ret,0.025399409786705397,baseline,XGBoost,15
+XLU_ret,0.02356158936836167,baseline,XGBoost,16
+XLV_ret,0.022634887846832034,baseline,XGBoost,17
+NFCICREDIT,0.02252666320615137,baseline,XGBoost,18
+NFCIRISK,0.022262808467739113,baseline,XGBoost,19
+XLC_ret,0.02201328549952024,baseline,XGBoost,20
+COPPER_ret,0.020625640871013606,baseline,XGBoost,21
+Commodity_Momentum,0.02047122947216092,baseline,XGBoost,22
+Flight_to_Quality,0.01863439623206475,baseline,XGBoost,23
+XLE_ret,0.018416750760774786,baseline,XGBoost,24
+Bond_Equity_Divergence,0.01832061503417131,baseline,XGBoost,25
+XLY_ret,0.01482925014999844,baseline,XGBoost,26
+XLP_ret,0.014546155082451755,baseline,XGBoost,27
+SP500_momentum_20d,0.014122605773001992,baseline,XGBoost,28
+VIX_chg,0.013892657552607272,baseline,XGBoost,29
+GSPC_ret_1D_lagged,0.013730776397829245,baseline,XGBoost,30
+VIX_chg_1D_lagged,0.013706219133084598,baseline,XGBoost,31
+NFCI,0.013510124373896064,baseline,XGBoost,32
+Finance_vs_Market,0.013103229275972909,baseline,XGBoost,33
+Tech_vs_Market,0.012901652783502532,baseline,XGBoost,34
+XLK_ret,0.012471663502602285,baseline,XGBoost,35
+T5YIE_bps,0.011814321765608104,baseline,XGBoost,36
+ICSA_chg,0.011314845747441985,baseline,XGBoost,37
+XLF_ret,0.010783161833112639,baseline,XGBoost,38
+IXIC_ret,0.008970186472520581,baseline,XGBoost,39
+USD_Risk_Signal,0.008443845218316053,baseline,XGBoost,40
+XLRE_ret,0.008280340203554257,baseline,XGBoost,41
+DGS10_bps,0.0080292544710737785,baseline,XGBoost,42
+Credit_Risk_Spread,0.007491130585293947,baseline,XGBoost,43
+BAMLH0A0HYM2_bps,0.007132454482195772,baseline,XGBoost,44
+Vol_Regime,0.006815236649930743,baseline,XGBoost,45
+DGS10_bps_1D_lagged,0.006236260627192895,baseline,XGBoost,46
+VIXCLS_chg,0.006072626587912587,baseline,XGBoost,47
+DGS30_bps,0.006027304816543799,baseline,XGBoost,48
+DGS5_bps,0.005996648430167044,baseline,XGBoost,49
+NFCILEVERAGE,0.0057969699245390815,baseline,XGBoost,50
+WRESBAL_chg,0.005778546348743029,baseline,XGBoost,51
+T10YIE_bps,0.005500542323412788,baseline,XGBoost,52
+BAMLC0A0CM_bps,0.005395497473903312,baseline,XGBoost,53
+DGS2_bps,0.00510199844798537,baseline,XGBoost,54
+WTREGEN_chg,0.004973246850495023,baseline,XGBoost,55
+CCSA_chg,9.861139962538707e-4,baseline,XGBoost,56
+WM2NS_chg,6.083513081905261e-4,baseline,XGBoost,57

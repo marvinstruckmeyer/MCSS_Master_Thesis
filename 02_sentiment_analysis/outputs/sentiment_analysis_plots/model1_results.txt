@@ -1,0 +1,24 @@
+MODEL 1: SIMPLE LINEAR REGRESSION WITH SENTIMENT
+
+
+Call:
+lm(formula = Target ~ simple_sentiment_index, data = data)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.060537 -0.004347  0.000313  0.005227  0.094439 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)
+(Intercept)             0.0003652  0.0020232   0.181    0.857
+simple_sentiment_index -0.0006697  0.0049547  -0.135    0.893
+
+Residual standard error: 0.01008 on 497 degrees of freedom
+Multiple R-squared:  3.676e-05,	Adjusted R-squared:  -0.001975 
+F-statistic: 0.01827 on 1 and 497 DF,  p-value: 0.8925
+
+
+Robust standard errors (Newey-West):
+Sentiment index: 0.006334872 
+Robust t-statistic: -0.105712 
+Robust p-value: 0.9158535 

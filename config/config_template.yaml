@@ -1,0 +1,46 @@
+api_key: YOUR_API_KEY_HERE
+collection_start_date: '2000-01-01'
+collection_end_date: '2025-06-06'
+max_results_per_query: 50.0
+max_pages_per_query: 100.0
+output_dir: data/
+api_delay: 1.0
+min_duration_seconds: 600
+max_concurrent_transcript_downloads: 5.0
+playlists:
+- name: Bloomberg Open Interest
+  id: PLGaYlBJIOoa_afta_ld-N5jFUcn3lfoEa
+  priority: 3
+- name: The Asia Trade
+  id: PLGaYlBJIOoa8zJLXejV8ZIXJydxAMu-kW
+  priority: 3
+- name: Horizons Middle East, Africa
+  id: PLGaYlBJIOoa8Any8ACdGyS1VRHvHk_DHA
+  priority: 3
+- name: The Pulse With Francine Lacqua - Full Episodes
+  id: PLGaYlBJIOoa-QPw6EVE9O8v_gOai_zk1-
+  priority: 1
+- name: The Opening Trade
+  id: PLGaYlBJIOoa-i5qOieIb8AlAQPqGJ4z1c
+  priority: 3
+- name: Bloomberg The Close (Full Shows)
+  id: PLGaYlBJIOoa9ubOo6nAEyu4wmkc6nzIVi
+  priority: 1
+- name: Bloomberg Brief
+  id: PLGaYlBJIOoa_vIH-o9MQZHg86xdx496BW
+  priority: 2
+- name: Bloomberg Daybreak Europe
+  id: PLGaYlBJIOoa8ykANlgpdOVzhZRr88ZLP_
+  priority: 2
+- name: Bloomberg The China Show
+  id: PLGaYlBJIOoa94hnb-z2i64eVPcGZPUvo9
+  priority: 2
+- name: Bloomberg Surveillance with Jon, Lisa and Annmarie (Full shows)
+  id: PLGaYlBJIOoa-qaI1saEniG3cR9V0Mu-PE
+  priority: 1
+- name: Bloomberg Surveillance with Tom, Jon and Lisa (Full Shows)
+  id: PLGaYlBJIOoa8tL_w1QSQVD41aMurPm6BE
+  priority: 1
+- name: Bloomberg Surveillance Radio with Tom Keene and Paul Sweeney
+  id: PLGaYlBJIOoa9Fsy0K5FDud2HYze_CUzKk
+  priority: 1

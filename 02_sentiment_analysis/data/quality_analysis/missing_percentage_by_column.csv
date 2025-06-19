@@ -1,0 +1,17 @@
+column,missing_percentage
+sentimentr_score_avg,100
+finbert_score_avg,100
+ollama_score_avg,100
+simple_sentiment_7day,43.038476794922644
+weighted_sentiment_7day,43.038476794922644
+sentiment_std,25.82308607695359
+video_count,13.288377627925426
+dict_sentiment_avg,13.288377627925426
+simple_sentiment_index,13.288377627925426
+total_views,13.288377627925426
+total_likes,13.288377627925426
+duration_weighted_sentiment,13.288377627925426
+view_weighted_sentiment,13.288377627925426
+like_weighted_sentiment,13.288377627925426
+weighted_sentiment_index,13.288377627925426
+date,0

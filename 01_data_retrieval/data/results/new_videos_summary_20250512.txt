@@ -1,0 +1,16 @@
+=== NEW BLOOMBERG VIDEOS COLLECTION SUMMARY ===
+Collection Date: 2025-05-12
+Total New Videos Collected: 791
+New Full Episodes (≥ 10 minutes): 96
+API Quota Used: 270
+
+New Videos by Playlist:
+  - Bloomberg Brief : 230
+  - Bloomberg Daybreak Europe : 177
+  - Bloomberg The China Show : 151
+  - Horizons Middle East, Africa : 85
+  - The Opening Trade : 148
+
+New Full Episodes by Playlist:
+  - Bloomberg The China Show : 40
+  - The Opening Trade : 56

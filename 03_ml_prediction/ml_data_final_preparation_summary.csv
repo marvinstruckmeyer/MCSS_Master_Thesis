@@ -1,0 +1,5 @@
+step,rows,description
+Original data,525,Raw dataset with all observations
+After removing market closures,504,Removed 21 market closure days
+After complete case analysis,12,Removed 492 incomplete cases
+Final dataset,12,Applied normalization to 15 variables

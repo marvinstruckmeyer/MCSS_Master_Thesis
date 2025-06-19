@@ -1,0 +1,25 @@
+MODEL 3: RANDOM FOREST
+
+
+Call:
+ randomForest(formula = Target ~ ., data = train_data, ntree = 500,      mtry = floor(sqrt(ncol(train_data) - 1)), importance = TRUE) 
+               Type of random forest: regression
+                     Number of trees: 500
+No. of variables tried at each split: 2
+
+          Mean of squared residuals: 0.0001138063
+                    % Var explained: -8.08
+
+Variable importance:
+                          %IncMSE IncNodePurity
+simple_sentiment_index -0.2139092   0.005461959
+GSPC_return_lag1        0.3058516   0.004112052
+VIX_return              3.1737707   0.006743723
+DGS10_diff             -1.0659318   0.004186129
+BAMLH0A0HYM2_diff       4.2728869   0.005781448
+VIXCLS                 -0.5743666   0.012179312
+
+Performance metrics (test set):
+RMSE: 0.009649119 
+MAE: 0.006884275 
+R-squared: 0.009046175 

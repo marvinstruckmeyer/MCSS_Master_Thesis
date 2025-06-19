@@ -1,0 +1,10 @@
+01_data_retrieval/data/combined/bloomberg_transcripts_part_1_of_5.csv
+01_data_retrieval/data/combined/bloomberg_transcripts_part_2_of_5.csv
+01_data_retrieval/data/combined/bloomberg_transcripts_part_3_of_5.csv
+01_data_retrieval/data/combined/bloomberg_transcripts_part_4_of_5.csv
+01_data_retrieval/data/combined/bloomberg_transcripts_part_5_of_5.csv
+.DS_Store
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj

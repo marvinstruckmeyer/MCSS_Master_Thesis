@@ -1,0 +1,37 @@
+MODEL 2: MULTIPLE LINEAR REGRESSION WITH CONTROLS
+
+
+Call:
+lm(formula = formula2, data = data)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.053275 -0.004114  0.000501  0.005615  0.084068 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)   
+(Intercept)            -3.881e-03  2.373e-03  -1.636  0.10251   
+simple_sentiment_index -2.619e-04  5.148e-03  -0.051  0.95944   
+GSPC_return_lag1        3.034e-03  4.450e-02   0.068  0.94566   
+VIX_return              4.292e-03  6.188e-03   0.694  0.48819   
+DGS10_diff             -1.877e-03  7.754e-03  -0.242  0.80881   
+BAMLH0A0HYM2_diff      -2.132e-02  7.076e-03  -3.013  0.00272 **
+VIXCLS                  2.617e-04  9.912e-05   2.641  0.00854 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.009964 on 492 degrees of freedom
+Multiple R-squared:  0.03297,	Adjusted R-squared:  0.02118 
+F-statistic: 2.796 on 6 and 492 DF,  p-value: 0.01103
+
+
+Variance Inflation Factors (VIF):
+simple_sentiment_index       GSPC_return_lag1             VIX_return             DGS10_diff      BAMLH0A0HYM2_diff 
+              1.104949               1.011250               1.460030               1.130383               1.572426 
+                VIXCLS 
+              1.137602 
+
+Robust standard errors (Newey-West):
+Sentiment index: 0.004488218 
+Robust t-statistic: -0.05835144 
+Robust p-value: 0.9534924 

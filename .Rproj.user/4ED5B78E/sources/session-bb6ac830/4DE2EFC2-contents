@@ -1,0 +1,173 @@
+# =============================================================================
+# LARGE FILE FINDER FOR GITHUB PREPARATION
+# =============================================================================
+# This script identifies large files (especially CSVs) in your thesis directory
+# to help prepare for GitHub upload and Zenodo archiving
+# 
+# Usage: Run this script from your thesis root directory
+# Author: Your Name
+# Date: 2025-06-19
+# =============================================================================
+
+library(fs)
+library(dplyr)
+library(readr)
+library(stringr)
+
+# Configuration
+MAX_GITHUB_SIZE_MB <- 25  # GitHub's file size limit
+THESIS_ROOT <- "."         # Current directory (change if needed)
+OUTPUT_FILE <- "large_files_report.csv"
+
+# Function to convert bytes to MB
+bytes_to_mb <- function(bytes) {
+  round(bytes / (1024 * 1024), 2)
+}
+
+# Function to scan directory for files
+scan_files <- function(root_dir = THESIS_ROOT) {
+  cat("Scanning files in:", normalizePath(root_dir), "\n")
+  
+  # Get all files recursively
+  all_files <- fs::dir_ls(root_dir, recurse = TRUE, type = "file")
+  
+  # Create file info dataframe
+  file_info <- tibble(
+    file_path = as.character(all_files),
+    file_name = basename(file_path),
+    file_ext = tools::file_ext(file_path),
+    dir_path = dirname(file_path),
+    file_size_bytes = fs::file_size(file_path),
+    file_size_mb = bytes_to_mb(as.numeric(file_size_bytes))
+  ) %>%
+    # Add relative path from thesis root
+    mutate(
+      relative_path = str_remove(file_path, paste0("^", normalizePath(root_dir), "/")),
+      relative_path = str_remove(relative_path, "^\\./")
+    ) %>%
+    # Sort by size descending
+    arrange(desc(file_size_mb))
+  
+  return(file_info)
+}
+
+# Function to identify large files
+identify_large_files <- function(file_info, size_limit_mb = MAX_GITHUB_SIZE_MB) {
+  large_files <- file_info %>%
+    filter(file_size_mb >= size_limit_mb) %>%
+    mutate(
+      recommended_action = case_when(
+        file_ext %in% c("csv", "xlsx", "json", "rds") ~ "Upload to Zenodo",
+        file_ext %in% c("pdf", "docx", "png", "jpg") ~ "Consider compression or Zenodo",
+        TRUE ~ "Review manually"
+      )
+    )
+  
+  return(large_files)
+}
+
+# Function to identify CSV files specifically
+analyze_csv_files <- function(file_info) {
+  csv_files <- file_info %>%
+    filter(file_ext == "csv") %>%
+    arrange(desc(file_size_mb))
+  
+  return(csv_files)
+}
+
+# Function to create .gitignore entries
+create_gitignore_entries <- function(large_files) {
+  # Create gitignore entries for large files
+  gitignore_entries <- large_files %>%
+    pull(relative_path) %>%
+    unique() %>%
+    sort()
+  
+  return(gitignore_entries)
+}
+
+# Function to generate summary report
+generate_summary <- function(file_info, large_files, csv_files) {
+  cat("\n", paste(rep("=", 70), collapse = ""), "\n")
+  cat("FILE SIZE ANALYSIS SUMMARY\n")
+  cat(paste(rep("=", 70), collapse = ""), "\n")
+  
+  cat("Total files scanned:", nrow(file_info), "\n")
+  cat("Total size of all files:", round(sum(file_info$file_size_mb), 2), "MB\n\n")
+  
+  cat("LARGE FILES (>= ", MAX_GITHUB_SIZE_MB, "MB):\n")
+  if (nrow(large_files) > 0) {
+    cat("Count:", nrow(large_files), "\n")
+    cat("Total size:", round(sum(large_files$file_size_mb), 2), "MB\n")
+    cat("File types:", paste(unique(large_files$file_ext), collapse = ", "), "\n\n")
+    
+    cat("Top 10 largest files:\n")
+    print(large_files %>% 
+            select(relative_path, file_size_mb, recommended_action) %>% 
+            head(10), n = 10)
+  } else {
+    cat("No files found above the size limit!\n")
+  }
+  
+  cat("\nCSV FILES ANALYSIS:\n")
+  cat("Total CSV files:", nrow(csv_files), "\n")
+  if (nrow(csv_files) > 0) {
+    cat("Total CSV size:", round(sum(csv_files$file_size_mb), 2), "MB\n")
+    cat("Large CSV files (>= ", MAX_GITHUB_SIZE_MB, "MB):", 
+        sum(csv_files$file_size_mb >= MAX_GITHUB_SIZE_MB), "\n")
+    
+    cat("\nAll CSV files by size:\n")
+    print(csv_files %>% 
+            select(relative_path, file_size_mb) %>%
+            mutate(needs_zenodo = file_size_mb >= MAX_GITHUB_SIZE_MB), n = Inf)
+  }
+}
+
+# Main execution function
+main <- function() {
+  cat("Large File Finder for GitHub Preparation\n")
+  cat("======================================\n\n")
+  
+  # Scan all files
+  file_info <- scan_files()
+  
+  # Identify large files
+  large_files <- identify_large_files(file_info)
+  
+  # Analyze CSV files specifically
+  csv_files <- analyze_csv_files(file_info)
+  
+  # Generate summary
+  generate_summary(file_info, large_files, csv_files)
+  
+  # Save detailed report
+  write_csv(large_files, OUTPUT_FILE)
+  cat("\nDetailed report saved to:", OUTPUT_FILE, "\n")
+  
+  # Generate .gitignore entries
+  if (nrow(large_files) > 0) {
+    gitignore_entries <- create_gitignore_entries(large_files)
+    
+    cat("\n", paste(rep("=", 70), collapse = ""), "\n")
+    cat("SUGGESTED .gitignore ENTRIES:\n")
+    cat(paste(rep("=", 70), collapse = ""), "\n")
+    cat("# Large files to be uploaded to Zenodo\n")
+    cat(paste(gitignore_entries, collapse = "\n"))
+    cat("\n\n")
+    
+    # Save .gitignore entries to file
+    writeLines(c("# Large files to be uploaded to Zenodo", gitignore_entries), 
+               "gitignore_large_files.txt")
+    cat("Suggested .gitignore entries saved to: gitignore_large_files.txt\n")
+  }
+  
+  # Return results for further analysis if needed
+  invisible(list(
+    all_files = file_info,
+    large_files = large_files,
+    csv_files = csv_files
+  ))
+}
+
+# Run the analysis
+results <- main()

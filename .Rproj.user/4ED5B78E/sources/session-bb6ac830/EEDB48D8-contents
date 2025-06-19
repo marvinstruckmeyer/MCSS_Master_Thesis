@@ -1,0 +1,405 @@
+# Comprehensive ML Data Preparation
+# Step 1: Remove market closure days (where GSPC_ret is NA)
+# Step 2: Apply simple scale normalization for large-scale variables
+# Result: Clean dataset ready for RF, XGBoost, and Linear Regression
+
+# Load required libraries
+library(tidyverse)
+library(lubridate)
+library(scales)
+
+# File paths
+input_file <- "03_ml_prediction/ready_sentiment_data_complete.csv"
+output_file <- "03_ml_prediction/ml_data_final.csv"
+log_file <- "03_ml_prediction/data_preparation_log.txt"
+
+cat("=== COMPREHENSIVE ML DATA PREPARATION ===\n")
+cat("Step 1: Remove market closure days (GSPC_ret = NA)\n")
+cat("Step 2: Normalize large-scale variables to 0-1 range\n")
+cat("Target: GSPC_ret (S&P 500 returns)\n")
+cat("Date:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n\n")
+
+# Start logging
+sink(log_file)
+cat("=== ML DATA PREPARATION LOG ===\n")
+cat("Generated:", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "\n\n")
+
+# ===== STEP 1: READ AND EXPLORE DATA =====
+cat("STEP 1: READING DATA\n")
+cat("====================\n")
+
+data <- read_csv(input_file, show_col_types = FALSE)
+cat("Original dataset:", nrow(data), "rows ×", ncol(data), "columns\n")
+cat("Date range:", min(data$date, na.rm = TRUE), "to", max(data$date, na.rm = TRUE), "\n")
+
+# Check target variable
+target_var <- "GSPC_ret"
+if (!target_var %in% names(data)) {
+  stop("Target variable 'GSPC_ret' not found in dataset!")
+}
+
+# Analyze missing data in target variable
+target_missing <- sum(is.na(data[[target_var]]))
+cat("Missing values in", target_var, ":", target_missing, "out of", nrow(data), 
+    "(", round(target_missing/nrow(data)*100, 1), "%)\n")
+
+sink()  # Stop logging to show on console too
+
+cat("Original dataset:", nrow(data), "rows ×", ncol(data), "columns\n")
+cat("Missing S&P 500 returns:", target_missing, "observations\n")
+
+# ===== STEP 2: REMOVE MARKET CLOSURE DAYS =====
+cat("\nSTEP 2: REMOVING MARKET CLOSURE DAYS\n")
+cat("====================================\n")
+
+# Identify rows where target is missing (market closure days)
+market_closure_days <- data %>% 
+  filter(is.na(!!sym(target_var))) %>%
+  select(date, !!sym(target_var))
+
+if (nrow(market_closure_days) > 0) {
+  cat("Market closure days to be removed:\n")
+  print(market_closure_days)
+  
+  # Check if these are weekends or known patterns
+  market_closure_analysis <- market_closure_days %>%
+    mutate(
+      weekday = weekdays(date),
+      is_weekend = weekday %in% c("Saturday", "Sunday"),
+      month = month(date),
+      day = day(date)
+    )
+  
+  weekend_closures <- sum(market_closure_analysis$is_weekend)
+  weekday_closures <- sum(!market_closure_analysis$is_weekend)
+  
+  cat("\nMarket closure analysis:\n")
+  cat("  - Weekend closures:", weekend_closures, "\n")
+  cat("  - Weekday closures (likely holidays):", weekday_closures, "\n")
+  
+  # Log the closure days
+  sink(log_file, append = TRUE)
+  cat("MARKET CLOSURE DAYS REMOVED:\n")
+  cat("============================\n")
+  cat("Total days removed:", nrow(market_closure_days), "\n")
+  cat("Weekend closures:", weekend_closures, "\n")
+  cat("Weekday closures (holidays):", weekday_closures, "\n\n")
+  cat("Specific dates removed:\n")
+  for (i in 1:nrow(market_closure_days)) {
+    cat("  -", as.character(market_closure_days$date[i]), 
+        "(", market_closure_analysis$weekday[i], ")\n")
+  }
+  cat("\n")
+  sink()
+}
+
+# Remove market closure days
+data_trading_days <- data %>% 
+  filter(!is.na(!!sym(target_var)))
+
+cat("After removing market closure days:", nrow(data_trading_days), "rows\n")
+cat("Removed:", nrow(data) - nrow(data_trading_days), "non-trading days\n")
+
+# Verify no missing target values remain
+remaining_target_na <- sum(is.na(data_trading_days[[target_var]]))
+if (remaining_target_na > 0) {
+  cat("⚠️ WARNING:", remaining_target_na, "missing target values still remain!\n")
+} else {
+  cat("✅ Target variable now complete (no missing values)\n")
+}
+
+# ===== STEP 3: KEEP DATA WITH TARGET AVAILABLE =====
+cat("\nSTEP 3: KEEPING ALL DATA WITH TARGET AVAILABLE\n")
+cat("==============================================\n")
+
+# We only remove rows where the target is missing (market closures)
+# Keep all other rows, even if they have missing data in other variables
+data_clean <- data_trading_days
+
+cat("Strategy: Keep all trading days, even with missing data in predictors\n")
+cat("Final dataset for ML:", nrow(data_clean), "rows\n")
+
+# Check remaining missing data in other variables (for information only)
+total_missing_values <- sum(is.na(data_clean %>% select(-!!sym(target_var))))
+cat("Missing values in predictor variables:", total_missing_values, "\n")
+
+if (total_missing_values > 0) {
+  # Show which variables still have missing data (for reference)
+  missing_summary <- data_clean %>%
+    select(-!!sym(target_var)) %>%  # Exclude target since we know it's complete
+    summarise(across(everything(), ~sum(is.na(.)))) %>%
+    pivot_longer(cols = everything(), names_to = "variable", values_to = "missing_count") %>%
+    filter(missing_count > 0) %>%
+    arrange(desc(missing_count))
+  
+  cat("\nVariables with missing data (keeping for ML models to handle):\n")
+  print(head(missing_summary, 10))  # Show top 10
+  
+  cat("\nNote: Tree-based models (RF, XGBoost) can handle missing data naturally\n")
+  cat("Linear regression will use available data for each prediction\n")
+} else {
+  cat("✅ No missing data in predictor variables\n")
+}
+
+# ===== STEP 4: SCALE ANALYSIS =====
+cat("\nSTEP 4: ANALYZING VARIABLE SCALES\n")
+cat("=================================\n")
+
+# Identify variables to analyze (exclude non-predictors)
+exclude_vars <- c("date", target_var, "total_views", "total_likes", "video_count")
+
+# Get all numeric variables first
+all_numeric_vars <- data_clean %>% 
+  select_if(is.numeric) %>% 
+  names()
+
+# Then exclude the ones we don't want (only if they exist in the numeric variables)
+exclude_vars_present <- intersect(exclude_vars, all_numeric_vars)
+numeric_vars <- setdiff(all_numeric_vars, exclude_vars_present)
+
+cat("Analyzing", length(numeric_vars), "potential predictor variables\n")
+
+# Analyze scales
+scale_analysis <- map_dfr(numeric_vars, function(var) {
+  values <- data_clean[[var]]
+  
+  tibble(
+    variable = var,
+    min_val = min(values, na.rm = TRUE),
+    max_val = max(values, na.rm = TRUE),
+    range = max_val - min_val,
+    mean_abs = mean(abs(values), na.rm = TRUE),
+    scale_category = case_when(
+      max(abs(values), na.rm = TRUE) > 100 ~ "very_large",
+      max(abs(values), na.rm = TRUE) > 10 ~ "large", 
+      max(abs(values), na.rm = TRUE) > 1 ~ "medium",
+      TRUE ~ "small"
+    )
+  )
+}) %>%
+  arrange(desc(range))
+
+# Show scale distribution
+cat("\nScale categories:\n")
+scale_summary <- scale_analysis %>% count(scale_category)
+print(scale_summary)
+
+# Show variables with largest scales
+cat("\nTop 10 variables by scale:\n")
+print(head(scale_analysis %>% select(variable, min_val, max_val, range, scale_category), 10))
+
+# ===== STEP 5: IDENTIFY NORMALIZATION CANDIDATES =====
+cat("\nSTEP 5: IDENTIFYING NORMALIZATION CANDIDATES\n")
+cat("============================================\n")
+
+# Get typical scale of target variable (returns)
+target_scale <- abs(data_clean[[target_var]]) %>% quantile(0.95, na.rm = TRUE)
+cat("95th percentile of absolute", target_var, "values:", round(target_scale, 4), "\n")
+
+# Identify variables that need normalization
+normalization_candidates <- scale_analysis %>%
+  filter(scale_category %in% c("large", "very_large")) %>%
+  mutate(
+    scale_ratio = pmax(abs(min_val), abs(max_val)) / target_scale,
+    needs_normalization = scale_ratio > 10  # 10x larger than typical returns
+  ) %>%
+  arrange(desc(scale_ratio))
+
+cat("\nLarge-scale variables (potential normalization candidates):\n")
+print(normalization_candidates %>% 
+        select(variable, min_val, max_val, scale_ratio, needs_normalization))
+
+# Final list of variables to normalize
+vars_to_normalize <- normalization_candidates %>% 
+  filter(needs_normalization) %>% 
+  pull(variable)
+
+cat("\n📋 NORMALIZATION DECISION:\n")
+cat("Variables to normalize:", length(vars_to_normalize), "\n")
+if (length(vars_to_normalize) > 0) {
+  for (var in vars_to_normalize) {
+    range_info <- scale_analysis %>% filter(variable == var)
+    cat("  ✓", var, ": [", round(range_info$min_val, 2), 
+        "to", round(range_info$max_val, 2), "]\n")
+  }
+} else {
+  cat("  → No variables need normalization - all on compatible scales!\n")
+}
+
+# ===== STEP 6: APPLY NORMALIZATION =====
+cat("\nSTEP 6: APPLYING MIN-MAX NORMALIZATION\n")
+cat("======================================\n")
+
+# Create final dataset
+final_data <- data_clean
+
+# Min-max normalization function (0-1 scaling)
+min_max_normalize <- function(x) {
+  (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+}
+
+# Track what we normalize
+normalization_log <- tibble(
+  variable = character(0),
+  original_min = numeric(0),
+  original_max = numeric(0),
+  original_range = numeric(0),
+  scale_ratio_to_target = numeric(0)
+)
+
+# Apply normalization
+if (length(vars_to_normalize) > 0) {
+  cat("Applying 0-1 normalization to", length(vars_to_normalize), "variables:\n")
+  
+  for (var in vars_to_normalize) {
+    # Store original stats
+    original_min <- min(final_data[[var]], na.rm = TRUE)
+    original_max <- max(final_data[[var]], na.rm = TRUE)
+    original_range <- original_max - original_min
+    scale_ratio <- max(abs(original_min), abs(original_max)) / target_scale
+    
+    # Apply normalization
+    final_data[[var]] <- min_max_normalize(final_data[[var]])
+    
+    # Verify result
+    new_min <- min(final_data[[var]], na.rm = TRUE)
+    new_max <- max(final_data[[var]], na.rm = TRUE)
+    
+    cat("  ✅", var, ":", 
+        "[", round(original_min, 1), ",", round(original_max, 1), "] → ",
+        "[", round(new_min, 3), ",", round(new_max, 3), "]\n")
+    
+    # Log the transformation
+    normalization_log <- bind_rows(normalization_log, tibble(
+      variable = var,
+      original_min = original_min,
+      original_max = original_max,
+      original_range = original_range,
+      scale_ratio_to_target = scale_ratio
+    ))
+  }
+} else {
+  cat("No normalization applied - all variables already on appropriate scales.\n")
+}
+
+# ===== STEP 7: FINAL VALIDATION =====
+cat("\nSTEP 7: FINAL VALIDATION\n")
+cat("========================\n")
+
+# Data integrity checks
+cat("Data integrity:\n")
+cat("  ✓ Rows:", nrow(final_data), "\n")
+cat("  ✓ Columns:", ncol(final_data), "\n")
+cat("  ✓ Missing values in target:", sum(is.na(final_data[[target_var]])), "\n")
+cat("  ✓ Total missing values:", sum(is.na(final_data)), "\n")
+
+# Date range check
+cat("  ✓ Date range:", min(final_data$date), "to", max(final_data$date), "\n")
+
+# Scale harmony check
+target_range <- range(final_data[[target_var]], na.rm = TRUE)
+cat("\nScale harmony:\n")
+cat("  ✓ Target (", target_var, ") range: [", 
+    round(target_range[1], 4), ",", round(target_range[2], 4), "]\n")
+
+if (length(vars_to_normalize) > 0) {
+  cat("  ✓ Normalized variables range: [0, 1]\n")
+  cat("  ✓ Scale compatibility: Achieved ✅\n")
+} else {
+  cat("  ✓ All variables already scale-compatible\n")
+}
+
+# ===== STEP 8: SAVE RESULTS =====
+cat("\nSTEP 8: SAVING FINAL DATASET\n")
+cat("============================\n")
+
+# Save the final ML-ready dataset
+write_csv(final_data, output_file)
+cat("✅ Final ML dataset saved:", output_file, "\n")
+
+# Save normalization log if any normalizations were applied
+if (nrow(normalization_log) > 0) {
+  norm_log_file <- str_replace(output_file, "\\.csv$", "_normalization_log.csv")
+  write_csv(normalization_log, norm_log_file)
+  cat("✅ Normalization log saved:", norm_log_file, "\n")
+}
+
+# Save data preparation summary
+summary_file <- str_replace(output_file, "\\.csv$", "_preparation_summary.csv")
+prep_summary <- tibble(
+  step = c("Original data", "After removing market closures", "Final dataset"),
+  rows = c(nrow(data), nrow(data_trading_days), nrow(final_data)),
+  description = c(
+    "Raw dataset with all observations",
+    paste("Removed", target_missing, "market closure days"),
+    paste("Applied normalization to", length(vars_to_normalize), "variables, kept missing predictors")
+  )
+)
+write_csv(prep_summary, summary_file)
+
+# Complete logging
+sink(log_file, append = TRUE)
+cat("FINAL SUMMARY:\n")
+cat("==============\n")
+cat("Original observations:", nrow(data), "\n")
+cat("Market closure days removed:", nrow(data) - nrow(data_trading_days), "\n")
+cat("Final observations:", nrow(final_data), "\n")
+cat("Variables normalized:", length(vars_to_normalize), "\n")
+cat("Missing data strategy: Kept all trading days, ML models will handle missing predictors\n")
+cat("Final dataset ready for ML models\n")
+sink()
+
+# ===== FINAL SUMMARY =====
+cat("\n" %>% str_repeat(60), "\n")
+cat("🎉 DATA PREPARATION COMPLETE! 🎉\n")
+cat("================================\n\n")
+
+cat("📊 SUMMARY:\n")
+cat("  • Original data:", nrow(data), "observations\n")
+cat("  • Market closures removed:", nrow(data) - nrow(data_trading_days), "days\n")
+cat("  • Final dataset:", nrow(final_data), "observations\n")
+cat("  • Data retention:", round(nrow(final_data)/nrow(data)*100, 1), "%\n")
+cat("  • Missing data strategy: Keep all trading days, let ML models handle missing predictors\n\n")
+
+cat("🔧 TRANSFORMATIONS:\n")
+if (length(vars_to_normalize) > 0) {
+  cat("  • Variables normalized:", length(vars_to_normalize), "\n")
+  cat("  • Normalization method: Min-Max (0-1 scaling)\n")
+  cat("  • Scale compatibility: ✅ Achieved\n")
+} else {
+  cat("  • No normalization needed\n")
+  cat("  • Variables already scale-compatible\n")
+}
+
+cat("\n📁 OUTPUT FILES:\n")
+cat("  • Final dataset:", basename(output_file), "\n")
+cat("  • Preparation log:", basename(log_file), "\n")
+cat("  • Summary:", basename(summary_file), "\n")
+if (nrow(normalization_log) > 0) {
+  cat("  • Normalization log:", basename(str_replace(output_file, "\\.csv$", "_normalization_log.csv")), "\n")
+}
+
+cat("\n🚀 READY FOR MACHINE LEARNING!\n")
+cat("Your dataset is now clean and properly scaled for:\n")
+cat("  ✓ Random Forest\n")
+cat("  ✓ XGBoost  \n")
+cat("  ✓ Multiple Linear Regression\n")
+
+cat("\n🎯 Next steps:\n")
+cat("  1. Load", basename(output_file), "\n")
+cat("  2. Split into train/test sets\n")
+cat("  3. Run your ML models\n")
+cat("  4. Compare performance across algorithms\n")
+
+# Return comprehensive summary
+list(
+  success = TRUE,
+  original_rows = nrow(data),
+  final_rows = nrow(final_data),
+  market_closures_removed = nrow(data) - nrow(data_trading_days),
+  variables_normalized = length(vars_to_normalize),
+  data_retention_pct = round(nrow(final_data)/nrow(data)*100, 1),
+  missing_data_strategy = "kept_trading_days_with_missing_predictors",
+  output_file = output_file,
+  ready_for_ml = TRUE
+)

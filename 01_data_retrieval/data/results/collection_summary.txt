@@ -1,0 +1,32 @@
+=== BLOOMBERG VIDEO COLLECTION SUMMARY ===
+Collection Date: 2025-05-12
+Total Videos Collected: 5026
+Full Episodes (≥ 10 minutes): 2120
+API Quota Used: 257
+Playlists Completed: 0 of 12
+
+Videos by Playlist:
+  - Bloomberg Brief : 500
+  - Bloomberg Daybreak Europe : 500
+  - Bloomberg Open Interest : 452
+  - Bloomberg Surveillance Radio with Tom Keene and Paul Sweeney : 424
+  - Bloomberg Surveillance with Jon, Lisa and Annmarie (Full shows) : 340
+  - Bloomberg Surveillance with Tom, Jon and Lisa (Full Shows) : 326
+  - Bloomberg The China Show : 500
+  - Bloomberg The Close (Full Shows) : 334
+  - Horizons Middle East, Africa : 499
+  - The Asia Trade : 394
+  - The Opening Trade : 497
+  - The Pulse With Francine Lacqua - Full Episodes : 260
+
+Full Episodes by Playlist:
+  - Bloomberg Daybreak Europe : 1
+  - Bloomberg Open Interest : 192
+  - Bloomberg Surveillance Radio with Tom Keene and Paul Sweeney : 228
+  - Bloomberg Surveillance with Jon, Lisa and Annmarie (Full shows) : 331
+  - Bloomberg Surveillance with Tom, Jon and Lisa (Full Shows) : 319
+  - Bloomberg The China Show : 241
+  - Bloomberg The Close (Full Shows) : 313
+  - Horizons Middle East, Africa : 102
+  - The Asia Trade : 198
+  - The Opening Trade : 195

@@ -1,0 +1,23 @@
+MODEL 4: XGBOOST
+
+Model parameters:
+nrounds: 100
+eta: 0.1
+max_depth: 6
+subsample: 0.8
+colsample_bytree: 0.8
+
+Feature importance:
+                  Feature       Gain      Cover  Frequency Importance
+                   <char>      <num>      <num>      <num>      <num>
+1:                 VIXCLS 0.27951971 0.24929380 0.20095408 0.27951971
+2: simple_sentiment_index 0.19229017 0.20804140 0.23792487 0.19229017
+3:             VIX_return 0.17145193 0.17719848 0.19081694 0.17145193
+4:      BAMLH0A0HYM2_diff 0.14322297 0.14410908 0.10435301 0.14322297
+5:       GSPC_return_lag1 0.12584843 0.15278365 0.17889088 0.12584843
+6:             DGS10_diff 0.08766681 0.06857359 0.08706023 0.08766681
+
+Performance metrics (test set):
+RMSE: 0.00982299 
+MAE: 0.007150543 
+R-squared: 0.000463112 

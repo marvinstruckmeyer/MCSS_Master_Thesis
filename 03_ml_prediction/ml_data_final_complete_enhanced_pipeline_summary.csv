@@ -1,0 +1,7 @@
+step,rows,columns,description
+Original sentiment data,525,48,Base sentiment data
+After adding features,525,103,Added 55 feature columns
+After adding news,525,104,Added 1 news columns
+After removing market closures,504,104,Removed 21 market closure days
+After enhanced features,504,120,Added 16 enhanced features (lagged + sentiment)
+Final normalized dataset,504,120,Normalized 25 large-scale variables

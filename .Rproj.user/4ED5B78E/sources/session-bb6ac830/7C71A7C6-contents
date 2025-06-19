@@ -1,0 +1,462 @@
+# Bloomberg Data Analysis for Thesis Data Section
+# This script analyzes the collected Bloomberg video and transcript data 
+# to generate comprehensive summary statistics for the thesis write-up
+
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(knitr)
+
+# Set up data paths based on your file structure
+DATA_DIR <- "data"
+PLAYLISTS_DIR <- file.path(DATA_DIR, "playlists")
+RESULTS_DIR <- file.path(DATA_DIR, "results")
+COMBINED_DIR <- file.path(DATA_DIR, "combined")
+CORRECTED_DIR <- file.path(DATA_DIR, "video_IDs", "corrected")
+
+# Create output directory for analysis results
+ANALYSIS_OUTPUT_DIR <- file.path(DATA_DIR, "thesis_analysis")
+dir.create(ANALYSIS_OUTPUT_DIR, recursive = TRUE, showWarnings = FALSE)
+
+# Function to safely read CSV files
+safe_read_csv <- function(file_path, description = "") {
+  if (file.exists(file_path)) {
+    tryCatch({
+      data <- read_csv(file_path, show_col_types = FALSE)
+      cat("✓ Successfully loaded", description, ":", nrow(data), "rows\n")
+      return(data)
+    }, error = function(e) {
+      cat("✗ Error reading", description, ":", e$message, "\n")
+      return(NULL)
+    })
+  } else {
+    cat("✗ File not found:", file_path, "\n")
+    return(NULL)
+  }
+}
+
+# Function to get file size in MB
+get_file_size_mb <- function(file_path) {
+  if (file.exists(file_path)) {
+    size_bytes <- file.info(file_path)$size
+    return(round(size_bytes / (1024^2), 2))
+  }
+  return(NA)
+}
+
+# 1. LOAD ALL MAIN DATA FILES
+cat("=== LOADING BLOOMBERG DATA FILES ===\n")
+
+# Load all videos data
+all_videos <- safe_read_csv(
+  file.path(RESULTS_DIR, "all_videos.csv"), 
+  "all videos"
+)
+
+# Load full episodes data
+full_episodes <- safe_read_csv(
+  file.path(RESULTS_DIR, "full_episodes.csv"), 
+  "full episodes"
+)
+
+# Load video IDs for transcripts
+video_ids_transcripts <- safe_read_csv(
+  file.path(RESULTS_DIR, "video_ids_for_transcripts.csv"), 
+  "video IDs for transcripts"
+)
+
+# Load corrected dates (if available)
+corrected_dates <- safe_read_csv(
+  file.path(CORRECTED_DIR, "all_videos_with_corrected_dates.csv"), 
+  "corrected dates"
+)
+
+# Load transcript summaries
+transcript_video_summary <- safe_read_csv(
+  file.path(COMBINED_DIR, "transcript_video_summary.csv"), 
+  "transcript video summary"
+)
+
+transcript_playlist_summary <- safe_read_csv(
+  file.path(COMBINED_DIR, "transcript_playlist_summary.csv"), 
+  "transcript playlist summary"
+)
+
+# Try to load one of the transcript chunks to get segment-level stats
+transcript_chunk <- safe_read_csv(
+  file.path(COMBINED_DIR, "bloomberg_transcripts_part_1_of_5.csv"), 
+  "transcript data sample"
+)
+
+# 2. PLAYLIST INFORMATION
+cat("\n=== PLAYLIST INFORMATION ===\n")
+
+# Extract playlist names from your scripts
+playlist_names <- c(
+  "Bloomberg Open Interest",
+  "The Asia Trade", 
+  "Horizons Middle East, Africa",
+  "The Pulse With Francine Lacqua - Full Episodes",
+  "The Opening Trade",
+  "Bloomberg The Close (Full Shows)",
+  "Bloomberg Brief",
+  "Bloomberg Daybreak Europe", 
+  "Bloomberg The China Show",
+  "Bloomberg Surveillance with Jon, Lisa and Annmarie (Full shows)",
+  "Bloomberg Surveillance with Tom, Jon and Lisa (Full Shows)",
+  "Bloomberg Surveillance Radio with Tom Keene and Paul Sweeney"
+)
+
+playlist_info <- data.frame(
+  playlist_name = playlist_names,
+  playlist_number = 1:length(playlist_names)
+)
+
+cat("Total Bloomberg playlists analyzed:", length(playlist_names), "\n")
+cat("Playlists:\n")
+for (i in 1:length(playlist_names)) {
+  cat(sprintf("%2d. %s\n", i, playlist_names[i]))
+}
+
+# 3. BASIC VIDEO STATISTICS
+cat("\n=== VIDEO COLLECTION STATISTICS ===\n")
+
+# Use the best available video data
+main_video_data <- if (!is.null(corrected_dates)) corrected_dates else 
+  if (!is.null(all_videos)) all_videos else
+    if (!is.null(full_episodes)) full_episodes else NULL
+
+if (!is.null(main_video_data)) {
+  # Convert date columns
+  if ("published_at" %in% names(main_video_data)) {
+    main_video_data$published_at <- ymd_hms(main_video_data$published_at)
+  }
+  if ("best_date" %in% names(main_video_data)) {
+    main_video_data$best_date <- ymd_hms(main_video_data$best_date)
+  }
+  
+  # Use the best available date
+  main_video_data$date_to_use <- if ("best_date" %in% names(main_video_data)) {
+    coalesce(main_video_data$best_date, main_video_data$published_at)
+  } else {
+    main_video_data$published_at
+  }
+  
+  # Basic video statistics
+  total_videos <- nrow(main_video_data)
+  total_playlists <- n_distinct(main_video_data$playlist_name, na.rm = TRUE)
+  
+  # Time period coverage
+  date_range <- range(main_video_data$date_to_use, na.rm = TRUE)
+  start_date <- date_range[1]
+  end_date <- date_range[2]
+  days_covered <- as.numeric(difftime(end_date, start_date, units = "days"))
+  
+  cat("Total videos collected:", comma(total_videos), "\n")
+  cat("Unique playlists:", total_playlists, "\n")
+  cat("Date range:", format(start_date, "%Y-%m-%d"), "to", format(end_date, "%Y-%m-%d"), "\n")
+  cat("Time period covered:", comma(days_covered), "days\n")
+  cat("Time period covered:", round(days_covered/365.25, 1), "years\n")
+  
+  # Videos by playlist
+  videos_by_playlist <- main_video_data %>%
+    filter(!is.na(playlist_name)) %>%
+    count(playlist_name) %>%
+    arrange(desc(n))
+  
+  cat("\nVideos by playlist:\n")
+  print(videos_by_playlist)
+}
+
+# 4. FULL EPISODES STATISTICS (longer videos for analysis)
+cat("\n=== FULL EPISODES STATISTICS ===\n")
+
+full_episodes_data <- if (!is.null(full_episodes)) full_episodes else 
+  if (!is.null(video_ids_transcripts)) video_ids_transcripts else NULL
+
+if (!is.null(full_episodes_data)) {
+  if ("published_at" %in% names(full_episodes_data)) {
+    full_episodes_data$published_at <- ymd_hms(full_episodes_data$published_at)
+  }
+  
+  total_full_episodes <- nrow(full_episodes_data)
+  
+  # Duration statistics
+  if ("duration_seconds" %in% names(full_episodes_data)) {
+    duration_stats <- full_episodes_data %>%
+      filter(!is.na(duration_seconds)) %>%
+      summarise(
+        count = n(),
+        min_duration_min = min(duration_seconds) / 60,
+        max_duration_min = max(duration_seconds) / 60,
+        mean_duration_min = mean(duration_seconds) / 60,
+        median_duration_min = median(duration_seconds) / 60,
+        total_duration_hours = sum(duration_seconds) / 3600
+      )
+    
+    cat("Full episodes (≥10 min):", comma(total_full_episodes), "\n")
+    cat("Duration range:", round(duration_stats$min_duration_min, 1), "-", 
+        round(duration_stats$max_duration_min, 1), "minutes\n")
+    cat("Average duration:", round(duration_stats$mean_duration_min, 1), "minutes\n")
+    cat("Median duration:", round(duration_stats$median_duration_min, 1), "minutes\n")
+    cat("Total video content:", round(duration_stats$total_duration_hours, 1), "hours\n")
+  }
+  
+  # Full episodes by playlist
+  if ("playlist_name" %in% names(full_episodes_data)) {
+    full_episodes_by_playlist <- full_episodes_data %>%
+      filter(!is.na(playlist_name)) %>%
+      count(playlist_name) %>%
+      arrange(desc(n))
+    
+    cat("\nFull episodes by playlist:\n")
+    print(full_episodes_by_playlist)
+  }
+}
+
+# 5. TRANSCRIPT STATISTICS
+cat("\n=== TRANSCRIPT STATISTICS ===\n")
+
+if (!is.null(transcript_video_summary)) {
+  total_videos_with_transcripts <- nrow(transcript_video_summary)
+  
+  # Word count statistics
+  word_stats <- transcript_video_summary %>%
+    filter(!is.na(words)) %>%
+    summarise(
+      videos_with_transcripts = n(),
+      total_words = sum(words, na.rm = TRUE),
+      mean_words_per_video = mean(words, na.rm = TRUE),
+      median_words_per_video = median(words, na.rm = TRUE),
+      min_words = min(words, na.rm = TRUE),
+      max_words = max(words, na.rm = TRUE)
+    )
+  
+  cat("Videos with transcripts:", comma(word_stats$videos_with_transcripts), "\n")
+  cat("Total words in corpus:", comma(word_stats$total_words), "\n")
+  cat("Average words per video:", comma(round(word_stats$mean_words_per_video)), "\n")
+  cat("Median words per video:", comma(round(word_stats$median_words_per_video)), "\n")
+  cat("Word count range:", comma(word_stats$min_words), "-", comma(word_stats$max_words), "\n")
+  
+  # Segment statistics
+  if ("segments" %in% names(transcript_video_summary)) {
+    segment_stats <- transcript_video_summary %>%
+      filter(!is.na(segments)) %>%
+      summarise(
+        total_segments = sum(segments, na.rm = TRUE),
+        mean_segments_per_video = mean(segments, na.rm = TRUE),
+        median_segments_per_video = median(segments, na.rm = TRUE)
+      )
+    
+    cat("Total transcript segments:", comma(segment_stats$total_segments), "\n")
+    cat("Average segments per video:", round(segment_stats$mean_segments_per_video), "\n")
+  }
+}
+
+if (!is.null(transcript_playlist_summary)) {
+  cat("\nTranscript coverage by playlist:\n")
+  print(transcript_playlist_summary)
+}
+
+# 6. TEMPORAL DISTRIBUTION
+cat("\n=== TEMPORAL DISTRIBUTION ===\n")
+
+if (!is.null(main_video_data) && "date_to_use" %in% names(main_video_data)) {
+  # Videos by year
+  videos_by_year <- main_video_data %>%
+    filter(!is.na(date_to_use)) %>%
+    mutate(year = year(date_to_use)) %>%
+    count(year) %>%
+    arrange(year)
+  
+  cat("Videos by year:\n")
+  print(videos_by_year)
+  
+  # Videos by month (recent years)
+  recent_videos <- main_video_data %>%
+    filter(!is.na(date_to_use), 
+           date_to_use >= as.Date("2020-01-01")) %>%
+    mutate(
+      year = year(date_to_use),
+      month = month(date_to_use),
+      year_month = floor_date(date_to_use, "month")
+    ) %>%
+    count(year_month) %>%
+    arrange(year_month)
+  
+  if (nrow(recent_videos) > 0) {
+    cat("\nMonthly video distribution (2020+):\n")
+    cat("Average videos per month:", round(mean(recent_videos$n)), "\n")
+    cat("Peak month:", format(recent_videos$year_month[which.max(recent_videos$n)], "%Y-%m"), 
+        "with", max(recent_videos$n), "videos\n")
+  }
+  
+  # Trading days analysis (approximate)
+  # Assuming ~252 trading days per year
+  trading_days_per_year <- 252
+  total_years <- as.numeric(difftime(end_date, start_date, units = "days")) / 365.25
+  estimated_trading_days <- round(total_years * trading_days_per_year)
+  
+  if (!is.null(full_episodes_data)) {
+    videos_per_trading_day <- nrow(full_episodes_data) / estimated_trading_days
+    cat("\nEstimated trading days in period:", comma(estimated_trading_days), "\n")
+    cat("Average videos per trading day:", round(videos_per_trading_day, 2), "\n")
+  }
+}
+
+# 7. DATA QUALITY AND PROCESSING
+cat("\n=== DATA QUALITY AND PROCESSING ===\n")
+
+# File sizes
+file_info <- data.frame(
+  file_type = character(),
+  file_path = character(),
+  size_mb = numeric(),
+  exists = logical(),
+  stringsAsFactors = FALSE
+)
+
+# Check main data files
+data_files <- list(
+  "All Videos" = file.path(RESULTS_DIR, "all_videos.csv"),
+  "Full Episodes" = file.path(RESULTS_DIR, "full_episodes.csv"),
+  "Transcript IDs" = file.path(RESULTS_DIR, "video_ids_for_transcripts.csv"),
+  "Corrected Dates" = file.path(CORRECTED_DIR, "all_videos_with_corrected_dates.csv"),
+  "Transcript Summary" = file.path(COMBINED_DIR, "transcript_video_summary.csv")
+)
+
+for (i in 1:5) {
+  transcript_file <- file.path(COMBINED_DIR, paste0("bloomberg_transcripts_part_", i, "_of_5.csv"))
+  if (file.exists(transcript_file)) {
+    data_files[[paste0("Transcript Part ", i)]] <- transcript_file
+  }
+}
+
+file_summary <- map_dfr(data_files, function(path) {
+  data.frame(
+    size_mb = get_file_size_mb(path),
+    exists = file.exists(path),
+    row.names = NULL
+  )
+}, .id = "file_type")
+
+cat("Data file summary:\n")
+print(file_summary)
+
+total_data_size <- sum(file_summary$size_mb, na.rm = TRUE)
+cat("\nTotal data size:", round(total_data_size, 1), "MB\n")
+
+# Processing filters applied
+cat("\nProcessing filters applied:\n")
+cat("• Minimum video duration: 600 seconds (10 minutes)\n")
+cat("• Date range: 2000-01-01 to present\n")
+cat("• Video quality: Standard definition or higher\n")
+cat("• Language: English transcripts only\n")
+
+# 8. GENERATE COMPREHENSIVE SUMMARY
+cat("\n=== GENERATING THESIS DATA SUMMARY ===\n")
+
+# Create a comprehensive summary for the thesis
+thesis_summary <- list(
+  # Basic counts
+  total_playlists = length(playlist_names),
+  total_videos = if(!is.null(main_video_data)) nrow(main_video_data) else NA,
+  total_full_episodes = if(!is.null(full_episodes_data)) nrow(full_episodes_data) else NA,
+  videos_with_transcripts = if(!is.null(transcript_video_summary)) nrow(transcript_video_summary) else NA,
+  
+  # Time coverage
+  start_date = if(!is.null(main_video_data)) min(main_video_data$date_to_use, na.rm = TRUE) else NA,
+  end_date = if(!is.null(main_video_data)) max(main_video_data$date_to_use, na.rm = TRUE) else NA,
+  years_covered = if(!is.null(main_video_data)) round(as.numeric(difftime(max(main_video_data$date_to_use, na.rm = TRUE), 
+                                                                          min(main_video_data$date_to_use, na.rm = TRUE), 
+                                                                          units = "days")) / 365.25, 1) else NA,
+  
+  # Content statistics
+  total_words = if(!is.null(transcript_video_summary)) sum(transcript_video_summary$words, na.rm = TRUE) else NA,
+  avg_words_per_video = if(!is.null(transcript_video_summary)) round(mean(transcript_video_summary$words, na.rm = TRUE)) else NA,
+  total_video_hours = if(!is.null(full_episodes_data) && "duration_seconds" %in% names(full_episodes_data)) 
+    round(sum(full_episodes_data$duration_seconds, na.rm = TRUE) / 3600, 1) else NA,
+  avg_video_duration_min = if(!is.null(full_episodes_data) && "duration_seconds" %in% names(full_episodes_data)) 
+    round(mean(full_episodes_data$duration_seconds, na.rm = TRUE) / 60, 1) else NA,
+  
+  # Data size
+  total_data_size_gb = round(total_data_size / 1024, 2)
+)
+
+# Save detailed summary to file
+summary_text <- c(
+  "=== BLOOMBERG TV DATA COLLECTION SUMMARY FOR THESIS ===",
+  "",
+  "DATA SOURCES:",
+  "• YouTube API v3 (video metadata and transcripts)",
+  "• Bloomberg Television playlists",
+  "• Direct transcript extraction using youtube-transcript-api",
+  "",
+  "PLAYLISTS ANALYZED:",
+  paste("•", playlist_names),
+  "",
+  "TEMPORAL COVERAGE:",
+  paste("• Start date:", thesis_summary$start_date),
+  paste("• End date:", thesis_summary$end_date),
+  paste("• Years covered:", thesis_summary$years_covered),
+  "",
+  "VIDEO STATISTICS:",
+  paste("• Total videos collected:", comma(thesis_summary$total_videos)),
+  paste("• Full episodes (≥10 min):", comma(thesis_summary$total_full_episodes)),
+  paste("• Videos with transcripts:", comma(thesis_summary$videos_with_transcripts)),
+  paste("• Total video content:", thesis_summary$total_video_hours, "hours"),
+  paste("• Average video duration:", thesis_summary$avg_video_duration_min, "minutes"),
+  "",
+  "TRANSCRIPT STATISTICS:",
+  paste("• Total words in corpus:", comma(thesis_summary$total_words)),
+  paste("• Average words per video:", comma(thesis_summary$avg_words_per_video)),
+  "",
+  "DATA VOLUME:",
+  paste("• Total data size:", thesis_summary$total_data_size_gb, "GB"),
+  "",
+  "PREPROCESSING FILTERS:",
+  "• Minimum duration: 10 minutes (600 seconds)",
+  "• Language: English transcripts only",
+  "• Quality: Standard definition or higher",
+  "• Duplicates: Removed based on video ID",
+  "",
+  "DATA QUALITY MEASURES:",
+  "• Date correction using YouTube API",
+  "• Transcript enhancement and cleaning",
+  "• Metadata validation and enrichment"
+)
+
+# Write summary to file
+writeLines(summary_text, file.path(ANALYSIS_OUTPUT_DIR, "thesis_data_summary.txt"))
+
+# Create a data frame for easy reference
+thesis_stats_df <- data.frame(
+  Metric = c("Bloomberg Playlists", "Total Videos", "Full Episodes (≥10 min)", 
+             "Videos with Transcripts", "Years Covered", "Total Words", 
+             "Avg Words per Video", "Total Video Hours", "Data Size (GB)"),
+  Value = c(thesis_summary$total_playlists, 
+            comma(thesis_summary$total_videos),
+            comma(thesis_summary$total_full_episodes),
+            comma(thesis_summary$videos_with_transcripts),
+            thesis_summary$years_covered,
+            comma(thesis_summary$total_words),
+            comma(thesis_summary$avg_words_per_video),
+            thesis_summary$total_video_hours,
+            thesis_summary$total_data_size_gb)
+)
+
+write_csv(thesis_stats_df, file.path(ANALYSIS_OUTPUT_DIR, "thesis_key_statistics.csv"))
+
+cat("Analysis complete!\n")
+cat("Summary files saved to:", ANALYSIS_OUTPUT_DIR, "\n")
+cat("Key files created:\n")
+cat("• thesis_data_summary.txt - Human-readable summary\n")
+cat("• thesis_key_statistics.csv - Key metrics table\n")
+
+# Print final summary for immediate use
+cat("\n=== KEY STATISTICS FOR THESIS DATA SECTION ===\n")
+print(thesis_stats_df, row.names = FALSE)
+
+# Return the summary for further use
+invisible(thesis_summary)
+

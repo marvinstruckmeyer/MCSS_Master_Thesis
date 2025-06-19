@@ -1,0 +1,65 @@
+=== BLOOMBERG VIDEO COLLECTION SUMMARY ===
+Collection Date: 2025-05-12
+Total New Videos: 795
+
+Playlist Details:
+  The Pulse With Francine Lacqua - Full Episodes:
+    Total Videos in Playlist: 260
+    Newly Collected: 0
+    Position Range: 0 to 259
+
+  Bloomberg The Close (Full Shows):
+    Total Videos in Playlist: 334
+    Newly Collected: 0
+    Position Range: 0 to 333
+
+  Bloomberg Surveillance with Jon, Lisa and Annmarie (Full shows):
+    Total Videos in Playlist: 340
+    Newly Collected: 0
+    Position Range: 0 to 339
+
+  Bloomberg Surveillance with Tom, Jon and Lisa (Full Shows):
+    Total Videos in Playlist: 329
+    Newly Collected: 0
+    Position Range: 0 to 328
+
+  Bloomberg Surveillance Radio with Tom Keene and Paul Sweeney:
+    Total Videos in Playlist: 429
+    Newly Collected: 0
+    Position Range: 0 to 428
+
+  Bloomberg Brief:
+    Total Videos in Playlist: 731
+    Newly Collected: 231
+    Position Range: 0 to 730
+
+  Bloomberg Daybreak Europe:
+    Total Videos in Playlist: 677
+    Newly Collected: 177
+    Position Range: 0 to 676
+
+  Bloomberg The China Show:
+    Total Videos in Playlist: 651
+    Newly Collected: 151
+    Position Range: 0 to 650
+
+  Bloomberg Open Interest:
+    Total Videos in Playlist: 458
+    Newly Collected: 0
+    Position Range: 0 to 457
+
+  The Asia Trade:
+    Total Videos in Playlist: 394
+    Newly Collected: 0
+    Position Range: 0 to 393
+
+  Horizons Middle East, Africa:
+    Total Videos in Playlist: 586
+    Newly Collected: 86
+    Position Range: 0 to 585
+
+  The Opening Trade:
+    Total Videos in Playlist: 648
+    Newly Collected: 148
+    Position Range: 0 to 647
+

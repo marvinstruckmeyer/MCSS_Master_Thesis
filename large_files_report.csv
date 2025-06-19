@@ -1,0 +1,6 @@
+file_path,file_name,file_ext,dir_path,file_size_bytes,file_size_mb,relative_path,recommended_action
+01_data_retrieval/data/combined/bloomberg_transcripts_part_3_of_5.csv,bloomberg_transcripts_part_3_of_5.csv,csv,01_data_retrieval/data/combined,199.5M,199.54,01_data_retrieval/data/combined/bloomberg_transcripts_part_3_of_5.csv,Upload to Zenodo
+01_data_retrieval/data/combined/bloomberg_transcripts_part_1_of_5.csv,bloomberg_transcripts_part_1_of_5.csv,csv,01_data_retrieval/data/combined,199.2M,199.24,01_data_retrieval/data/combined/bloomberg_transcripts_part_1_of_5.csv,Upload to Zenodo
+01_data_retrieval/data/combined/bloomberg_transcripts_part_2_of_5.csv,bloomberg_transcripts_part_2_of_5.csv,csv,01_data_retrieval/data/combined,199M,198.99,01_data_retrieval/data/combined/bloomberg_transcripts_part_2_of_5.csv,Upload to Zenodo
+01_data_retrieval/data/combined/bloomberg_transcripts_part_4_of_5.csv,bloomberg_transcripts_part_4_of_5.csv,csv,01_data_retrieval/data/combined,198.3M,198.29,01_data_retrieval/data/combined/bloomberg_transcripts_part_4_of_5.csv,Upload to Zenodo
+01_data_retrieval/data/combined/bloomberg_transcripts_part_5_of_5.csv,bloomberg_transcripts_part_5_of_5.csv,csv,01_data_retrieval/data/combined, 56.2M,56.25,01_data_retrieval/data/combined/bloomberg_transcripts_part_5_of_5.csv,Upload to Zenodo

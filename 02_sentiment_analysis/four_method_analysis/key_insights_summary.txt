@@ -1,0 +1,17 @@
+FOUR-METHOD SENTIMENT ANALYSIS INSIGHTS
+
+🏆 STRONGEST CORRELATION: Dictionary-SentimentR (0.339)
+⚡ MOST SURPRISING: Dictionary-FinBERT negative correlation (-0.199)
+🎯 OPTIMAL THRESHOLD: -0.5 for maximum four-method agreement
+📊 AGREEMENT RATE: 34000% all four methods agree
+🌊 WIDEST RANGE: FinBERT (1.783 units)
+📈 MOST POSITIVE: FinBERT
+📉 MOST NEGATIVE: Dictionary
+⚠️ MAJOR DISAGREEMENTS: 109 videos (top 5%)
+
+KEY TAKEAWAYS:
+• FinBERT shows fundamentally different patterns from traditional methods
+• Dictionary and SentimentR have strongest agreement (linguistic similarity)
+• Ollama's quantization creates unique discrete patterns
+• Financial context (FinBERT) vs general sentiment creates interesting tensions
+• Show-specific patterns suggest content type affects sentiment consistency

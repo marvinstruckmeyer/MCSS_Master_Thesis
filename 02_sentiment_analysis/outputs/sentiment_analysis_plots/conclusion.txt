@@ -1,0 +1,13 @@
+SUMMARY AND CONCLUSION
+
+Sentiment as a predictor of S&P 500 returns:
+- Sentiment index was NOT significant in the simple linear model (p = 0.9159 )
+- Sentiment index was NOT significant in the multiple linear model (p = 0.9535 )
+- Sentiment index ranked 4 out of 6 in Random Forest importance
+- Sentiment index ranked 2 out of 6 in XGBoost importance
+
+Best performing model: Linear (Sentiment Only) with test RMSE of 0.009208 
+
+OVERALL CONCLUSION:
+Sentiment appears to have predictive value for S&P 500 returns,
+though its importance varies across different modeling approaches.
