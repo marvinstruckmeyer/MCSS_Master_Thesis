@@ -117,7 +117,7 @@ To replicate this work, you need to generate API keys and replace the current pl
 2. Enable "YouTube Data API v3"
 3. Create an API Key
 4. **Replace in these files:**
-   - `01_data_retrieval and 02_date_correction.R`: 
+   - `01_data_retrieval/scripts/02_date_correction.R`: 
      ```r
      YOUTUBE_API_KEY <- "YOUR_KEY_HERE"
      ```
