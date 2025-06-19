@@ -154,12 +154,12 @@ For LLM-based sentiment analysis:
    - Update `ollama_url` variable
 
 ### Files to update checklist
-- [ ] `01_data_retrieval/scripts/02_date_correction.R`
-- [ ] `03_ml_prediction/scripts/01_database_raw_data.R`
-- [ ] `02_sentiment_analysis/scripts/06_01_basic_sentiment_server_solution_Ollama.R`
-- [ ] `config/config.yaml`
+`01_data_retrieval/scripts/02_date_correction.R`
+`03_ml_prediction/scripts/01_database_raw_data.R`
+`02_sentiment_analysis/scripts/06_01_basic_sentiment_server_solution_Ollama.R`
+`config/config.yaml`
 
-## 🚀 Running the analysis
+## Running the analysis
 
 ### 1. Data collection
 ```r
