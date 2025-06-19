@@ -61,11 +61,17 @@ Full pipeline:
 2. Sentiment analysis pipeline
 
 02_sentiment_analysis/scripts/01_basic_sentiment.R → Loughran-McDonald + sentimentr analysis on transcripts
-02_sentiment_analysis/scripts/06_01_basic_sentiment_server_solution_Ollama.R → Ollama LLM sentiment (optional)
+
+02_sentiment_analysis/scripts/06_01_basic_sentiment_server_solution_Ollama.R → Ollama LLM sentiment
+
 02_sentiment_analysis/scripts/06_02_basic_sentiment_server_solution_FinBERT.R → FinBERT sentiment
+
 02_sentiment_analysis/scripts/07_merge_ollama.R → Merges Ollama + Dictionary results
+
 02_sentiment_analysis/scripts/09_final_merge_all_methods.R → this script is key as it combines all 4 sentiment methods with metadata
+
 02_sentiment_analysis/scripts/03_index_creation.R → creates daily sentiment indices
+
 02_sentiment_analysis/scripts/10_ml_ready_data_run_BEFORE_12_ml_complete_prep.R → prepares for ML
 
 3. Market data & feature engineering
