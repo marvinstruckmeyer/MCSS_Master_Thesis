@@ -45,11 +45,11 @@ Due to GitHub's file size limitations, I host the the main transcript datasets o
 🔗 **[Download Large Datasets from Zenodo](https://zenodo.org/records/15698311)**
 
 The following files should be downloaded and placed in `01_data_retrieval/data/combined/`:
-- `bloomberg_transcripts_part_1_of_5.csv` (199 MB)
-- `bloomberg_transcripts_part_2_of_5.csv` (199 MB)
-- `bloomberg_transcripts_part_3_of_5.csv` (200 MB)
-- `bloomberg_transcripts_part_4_of_5.csv` (198 MB)
-- `bloomberg_transcripts_part_5_of_5.csv` (56 MB)
+- `bloomberg_transcripts_part_1_of_5.csv` (209 MB)
+- `bloomberg_transcripts_part_2_of_5.csv` (209 MB)
+- `bloomberg_transcripts_part_3_of_5.csv` (209 MB)
+- `bloomberg_transcripts_part_4_of_5.csv` (208 MB)
+- `bloomberg_transcripts_part_5_of_5.csv` (59 MB)
 
 ## 🔧 Setup and reproduction
 
