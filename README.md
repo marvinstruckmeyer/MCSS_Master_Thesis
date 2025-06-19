@@ -116,9 +116,8 @@ The following files should be downloaded and placed in `01_data_retrieval/data/c
 ## Setup and reproduction
 
 ### Prerequisites
-- R (>= 4.0.0)
+- R (>= 4.0.0) with required R packages (should be installed automatically by scripts)
 - Python (>= 3.8) - for FinBERT sentiment analysis
-- Required R packages (will be installed automatically by scripts)
 
 ### API keys 
 
@@ -201,13 +200,13 @@ source("VIX_Prediction_time_series_cross_validation.R")
 source("UST_Prediction_time_series_cross_validation.R")
 ```
 
-## 📈 Key results
+## Key results
 
 - **4 sentiment analysis methods** compared: Dictionary-based, SentimentR, FinBERT, and Ollama
 - **Time-series cross-validation** on 3 financial indicators
 - **Statistical significance testing** using simple t-tests and more sophisticated Diebold-Mariano tests
 
-## 📚 Methods
+## Methods
 
 ### Sentiment Analysis
 - **Loughran-McDonald Dictionary**: finance-specific dictionary
@@ -216,9 +215,8 @@ source("UST_Prediction_time_series_cross_validation.R")
 - **Ollama LLM**: large language model sentiment classification
 
 ### Machine Learning
-- **Random forest** and **XGBoost** models
+- **Random forest** and **XGBoost** models in ablation studies
 - **Time-series cross-validation** with expanding window
-- **Feature engineering** including lags and rolling statistics
 - **Multiple target variables**: daily returns of S&P 500, daily changes of 10-Year US Treasury and VIX
 
 
@@ -226,6 +224,3 @@ source("UST_Prediction_time_series_cross_validation.R")
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
----
-*This repository contains the complete replication materials for the master's thesis "Sentiment Analysis of Financial TV Shows and Predictive Modelling" submitted to UC3M in 2025.*
