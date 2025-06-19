@@ -1,6 +1,5 @@
 # Bloomberg Transcripts Sentiment Analysis
 # This script analyzes sentiment in Bloomberg transcripts using multiple methods
-# Currently implements dictionary-based approach, with placeholders for other methods
 
 # Install required packages if not already installed
 if (!require("pacman")) install.packages("pacman")

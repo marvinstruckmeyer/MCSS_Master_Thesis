@@ -303,20 +303,10 @@ comprehensive_h2_analysis <- function(sp500_results, vix_results) {
   }
 }
 
-# =============================================================================
-# EXECUTION EXAMPLE
-# =============================================================================
-
+# execuation
 sp500_data <- read_csv("SP_500_comprehensive_results_time_series_cross_validation/ts_cv_results_summary_SP_500.csv")
 vix_data <- read_csv("VIX_sentiment_ablation_results_time_series_cross_validation/vix_cv_results_summary.csv")
  
 h2_analysis <- comprehensive_h2_analysis(sp500_data, vix_data)
 
-cat("H2 TESTING FRAMEWORK READY!\n")
-cat("===========================\n")
-cat("This approach:\n")
-cat("1. Compares improvement magnitudes between volatility and returns\n")
-cat("2. Tests statistical significance using t-test and sign test\n")
-cat("3. Provides comprehensive evidence evaluation for H2\n")
-cat("4. Handles multiple sentiment experiments and models\n")
 

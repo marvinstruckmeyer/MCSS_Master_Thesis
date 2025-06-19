@@ -1,6 +1,5 @@
 # bloomberg_transcript_collector.R
 # Script to download high-quality transcripts for Bloomberg videos
-# Using the direct method for maximum transcript quality
 
 library(tidyverse)
 library(reticulate)

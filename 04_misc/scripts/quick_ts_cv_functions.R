@@ -1,6 +1,5 @@
 # =============================================================================
-# QUICK TIME SERIES CV REPLACEMENT FOR YOUR THREE SCRIPTS
-# Optimized for ~500 observations and thesis deadline constraints
+# TIME SERIES CV
 # =============================================================================
 
 # CONFIGURATION FOR 500 OBSERVATIONS
@@ -13,10 +12,10 @@ quick_ts_cv_config <- list(
 )
 
 # =============================================================================
-# SINGLE FUNCTION TO REPLACE YOUR TRAIN-TEST SPLIT IN ALL THREE SCRIPTS
+# SINGLE FUNCTION 
 # =============================================================================
 
-# This replaces the data splitting section in ALL your scripts
+# This replaces the data splitting sectior
 run_experiments_with_ts_cv <- function(data, experiments_list, target_col_name) {
   
   cat("Running Time Series CV with", nrow(data), "observations\n")
@@ -353,13 +352,3 @@ create_cv_summary_table <- function(all_cv_results) {
   return(summary_df)
 }
 
-cat("Quick Time Series CV framework loaded!\n")
-cat("Optimized for ~500 observations and thesis deadlines\n")
-cat("Configuration: 200 initial window, 30 step size, 6 splits\n")
-cat("This will give you robust validation without excessive computation time.\n\n")
-
-cat("USAGE:\n")
-cat("1. Replace your data splitting section with this function\n")
-cat("2. Define experiments_list with your feature combinations\n")
-cat("3. Run: results <- run_experiments_with_ts_cv(data, experiments_list, target_col)\n")
-cat("4. Get summary: summary_table <- create_cv_summary_table(results)\n")

@@ -398,19 +398,10 @@ comprehensive_h3_analysis <- function(sp500_news_results, ust_news_results) {
   ))
 }
 
-# =============================================================================
-# EXECUTION EXAMPLE
-# =============================================================================
+# execution
 sp500_news_data <- read_csv("SP_500_comprehensive_results_news_sentiment/ts_cv_results_summary_SP500_news.csv")
 ust_news_data <- read_csv("UST_comprehensive_results_time_series_cross_validation_news_sentiment/ts_cv_results_summary_UST_news.csv") 
 
 #
 h3_analysis <- comprehensive_h3_analysis(sp500_news_data, ust_news_data)
 
-cat("H3 TESTING FRAMEWORK READY!\n")
-cat("============================\n")
-cat("This approach:\n")
-cat("1. Tests incremental value of TV sentiment beyond news sentiment\n")
-cat("2. Uses same statistical methodology as H1 for consistency\n")
-cat("3. Provides comprehensive evidence evaluation across targets\n")
-cat("4. Tests the most stringent requirement for TV sentiment value\n")

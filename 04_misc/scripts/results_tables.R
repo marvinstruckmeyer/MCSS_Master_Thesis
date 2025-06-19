@@ -307,10 +307,6 @@ summary_table <- create_summary_table()
 
 
 ### for the appendix
-# =============================================================================
-# WIDE FORMAT PROFESSIONAL TABLES - SPACE EFFICIENT
-# =============================================================================
-
 library(kableExtra)
 library(dplyr)
 

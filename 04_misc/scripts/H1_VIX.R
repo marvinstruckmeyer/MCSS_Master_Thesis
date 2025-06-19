@@ -355,19 +355,8 @@ comprehensive_vix_h1_analysis <- function(vix_results) {
   ))
 }
 
-# =============================================================================
-# EXECUTION EXAMPLE
-# =============================================================================
-
-# Example usage:
+# execuation
 vix_data <- read_csv("VIX_sentiment_ablation_results_time_series_cross_validation/vix_cv_results_summary.csv")
 vix_h1_analysis <- comprehensive_vix_h1_analysis(vix_data)
 
-cat("VIX-SPECIFIC H1 ANALYSIS READY!\n")
-cat("===============================\n")
-cat("This approach:\n")
-cat("1. Tests H1 specifically for VIX (volatility) prediction\n")
-cat("2. May show stronger statistical significance than S&P 500\n")
-cat("3. Aligns with H2 findings that sentiment works better for volatility\n")
-cat("4. Provides targeted evidence for volatility forecasting applications\n")
 

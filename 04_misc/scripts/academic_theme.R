@@ -1,19 +1,3 @@
-### Plots for paper
-# Create comprehensive pair plot
-#if (require(GGally, quietly = TRUE)) {
- # pair_plot <- ggpairs(
-  #  pair_plot_data,
-   # title = "Comprehensive Four-Method Pairwise Analysis",
-    #upper = list(continuous = wrap("cor", size = 4, color = "black")),
-    #lower = list(continuous = wrap("points", alpha = 0.3, size = 0.8)),
-    #diag = list(continuous = wrap("densityDiag", alpha = 0.7))
-  #) +
-   # theme_minimal()
-  
-  #ggsave(file.path(output_dir, "four_method_pairwise_analysis.png"), 
-   #      pair_plot, width = 14, height = 12, dpi = 300)
-#}
-
 # ===== STANDARDIZED ACADEMIC THEME FOR THESIS PLOTS =====
 # Load required libraries
 library(ggplot2)
@@ -210,8 +194,6 @@ create_academic_agreement_plot <- function(agreement_analysis) {
     theme_academic
 }
 
-# ===== USAGE EXAMPLE =====
-# For existing plots, simply add + theme_academic
 # existing_plot + theme_academic
 
 # For new plots, use the academic color palette:

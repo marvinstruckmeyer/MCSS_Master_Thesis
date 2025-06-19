@@ -323,9 +323,3 @@ ust_results_path <- "UST_comprehensive_results_time_series_cross_validation/ts_c
 
 dm_analysis <- enhanced_h1_analysis_with_dm(sp500_results_path, ust_results_path)
 
-cat("PROPER DIEBOLD-MARIANO TEST EXTRACTION READY!\n")
-cat("==============================================\n")
-cat("To use:\n")
-cat("1. Find your saved .rds files from previous runs\n")
-cat("2. Run: enhanced_h1_analysis_with_dm('path/to/sp500_results.rds', 'path/to/ust_results.rds')\n")
-cat("3. Get proper statistical significance testing without re-running models!\n")

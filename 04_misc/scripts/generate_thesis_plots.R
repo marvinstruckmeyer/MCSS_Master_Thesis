@@ -1,6 +1,3 @@
-# ===== GENERATE THESIS PLOTS FOR WORD DOCUMENT =====
-# This script creates and saves the specific plots you need for your thesis
-
 # Load required libraries
 library(tidyverse)
 library(ggplot2)
@@ -9,7 +6,7 @@ library(gridExtra)
 
 source("academic_theme.R")
 
-# Load your data (adjust path as needed)
+# Load data
 input_file <- "02_sentiment_analysis/data/combined_sentiment_results_with_finbert.csv"
 sentiment_data <- read_csv(input_file, show_col_types = FALSE)
 
@@ -231,23 +228,11 @@ cat("\n" + rep("=", 50) + "\n")
 cat("ALL THESIS PLOTS GENERATED SUCCESSFULLY!\n")
 cat(rep("=", 50) + "\n")
 cat("Files saved in:", thesis_plots_dir, "\n")
-cat("Both PNG (for Word) and PDF (for LaTeX) versions created\n\n")
 
 cat("Files created:\n")
 cat("1. figure1_pairwise_analysis.png/.pdf\n")
 cat("2. figure2_threshold_analysis.png/.pdf\n") 
 cat("3. figure3_finbert_disagreement.png/.pdf\n")
 cat("4. figure4_agreement_patterns.png/.pdf\n\n")
-
-cat("For Word: Use the .png files (300 DPI, high quality)\n")
-cat("For LaTeX: Use the .pdf files (vector graphics, scalable)\n")
-
-# Print some key statistics for your text
-cat("\nKey statistics for your text:\n")
-correlations <- cor(complete_data[c("dict_sentiment", "sentimentr_score", "ollama_score", "finbert_score")])
-cat("Dictionary-SentimentR correlation:", round(correlations[1,2], 3), "\n")
-cat("Dictionary-FinBERT correlation:", round(correlations[1,4], 3), "\n")
-cat("Complete four-method agreement:", round(mean(agreement_analysis$positive_votes %in% c(0,4)) * 100, 1), "%\n")
-cat("Split decisions (2-2):", round(mean(agreement_analysis$positive_votes == 2) * 100, 1), "%\n")
 
 
