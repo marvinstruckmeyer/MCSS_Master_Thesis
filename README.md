@@ -38,7 +38,7 @@ MCSS_Master_Thesis/
 └── *_results_*/              # Model results and outputs
 ```
 
-## 📊 Large datasets (Zenodo)
+## Large datasets (Zenodo)
 
 Due to GitHub's file size limitations, I host the the main transcript datasets on Zenodo:
 
@@ -51,7 +51,7 @@ The following files should be downloaded and placed in `01_data_retrieval/data/c
 - `bloomberg_transcripts_part_4_of_5.csv` (208 MB)
 - `bloomberg_transcripts_part_5_of_5.csv` (59 MB)
 
-## 🔧 Setup and reproduction
+## Setup and reproduction
 
 ### Prerequisites
 - R (>= 4.0.0)
