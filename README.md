@@ -15,27 +15,37 @@ This thesis studies the relationship between sentiment extracted from Bloomberg 
 ```
 MCSS_Master_Thesis/
 │
-├── 01_data_retrieval/          # YouTube API data collection
+├── 01_data_retrieval/                                            # YouTube API data collection
 │   ├── scripts/
+│   │   ├── 01_video_collection.R                                   # Collect Bloomberg video metadata
+│   │   ├── 02_date_correction.R                                    # Fix publication dates  
+│   │   └── 03_transcript_collection.R                              # Download video transcripts
 │   └── data/
 │
-├── 02_sentiment_analysis/      # Sentiment analysis pipeline
+├── 02_sentiment_analysis/                                        # Sentiment analysis pipeline
 │   ├── scripts/
+│   │   ├── 03_index_creation.R                                     # Create daily sentiment indices
+│   │   ├── 09_final_merge_all_methods.R                            # Merge all sentiment methods
+│   │   ├── 10_ml_ready_data_run_BEFORE_12_ml_complete_prep.R       # Prepare for ML
+│   │   └── 12_ml_complete_prep.R                                   # KEY: Final ML dataset creation
 │   └── data/
 │
-├── 03_ml_prediction/          # Machine learning models
-│   ├── scripts/
-│   └── data/
-│
-├── 04_misc/                   # Utilities and plotting
+├── 03_ml_prediction/                                              # Machine learning model preparation
 │   └── scripts/
 │
-├── market_macro_data/         # Economic indicators
+├── 04_misc/                                                         # Utilities and plotting
+│   └── scripts/
 │
-├── config/                    # Configuration files
+├── market_macro_data/                                               # Economic indicators
+│
+├── config/                                                          # Configuration files
 │   └── config.yaml
 │
-└── *_results_*/              # Model results and outputs
+├── SP500_Prediction_time_series_cross_validation.R                 # KEY: S&P 500 ML models
+├── UST_Prediction_time_series_cross_validation.R                   # KEY: Treasury ML models  
+├── VIX_Prediction_time_series_cross_validation.R                   # KEY: VIX ML models
+│
+└── *_results_*/                                                    # Model results and outputs
 ```
 
 ## Large datasets (Zenodo)
