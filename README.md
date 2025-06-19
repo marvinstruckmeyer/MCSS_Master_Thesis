@@ -52,13 +52,15 @@ MCSS_Master_Thesis/
 This repository contains many files from continuous research. Some files are redundant. For replication, focus on these key files in order:
 Full pipeline:
 
-1. Data collection
+### 1. Data collection
 
 01_data_retrieval/scripts/01_video_collection.R → this script creates video metadata
+
 01_data_retrieval/scripts/02_date_correction.R → this script fixes broadcast dates
+
 01_data_retrieval/scripts/03_transcript_collection.R → this script downloads transcripts → Creates the 5 large CSV files on Zenodo
 
-2. Sentiment analysis pipeline
+### 2. Sentiment analysis pipeline
 
 02_sentiment_analysis/scripts/01_basic_sentiment.R → Loughran-McDonald + sentimentr analysis on transcripts
 
@@ -74,22 +76,26 @@ Full pipeline:
 
 02_sentiment_analysis/scripts/10_ml_ready_data_run_BEFORE_12_ml_complete_prep.R → prepares for ML
 
-3. Market data & feature engineering
+### 3. Market data & feature engineering
 
 03_ml_prediction/scripts/01_database_raw_data.R → this script collects market data (FRED API required)
+
 03_ml_prediction/scripts/01_database_feature_engineering.R → this script creates technical indicators
 
-4. Create final ML dataset
+### 4. Create final ML dataset
 
 02_sentiment_analysis/scripts/12_ml_complete_prep.R → this script is critical since it merges and creates final ML dataset
 
-5. Prediction models (use final dataset)
+### 5. Prediction models (use final dataset)
 
 SP500_Prediction_time_series_cross_validation.R → script for S&P 500 prediction (Hypothesis 1)
+
 UST_Prediction_time_series_cross_validation.R → script for 10-Year US Treasury yield prediction (Hypothesis 1)
+
 VIX_Prediction_time_series_cross_validation.R → script for VIX prediction (Hypothesis 2)
 
 SP500_Prediction_time_series_cross_validation_news_sentiment.R → script for S&P 500 prediction with traditional sentiment (Hypothesis 3)
+
 UST_Prediction_time_series_cross_validation_news_sentiment.R → script for 10-Year US Treasury yield prediction with traditional sentiment (Hypothesis 3)
 
 
