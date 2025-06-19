@@ -62,7 +62,7 @@ Full pipeline:
 
 ### 2. Sentiment analysis pipeline
 
-02_sentiment_analysis/scripts/01_basic_sentiment.R → Loughran-McDonald + sentimentr analysis on transcripts
+02_sentiment_analysis/scripts/01_basic_sentiment.R → Loughran-McDonald on transcripts
 
 02_sentiment_analysis/scripts/06_01_basic_sentiment_server_solution_Ollama.R → Ollama LLM sentiment
 
